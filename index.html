@@ -1,0 +1,1901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accident & Disaster Management Manual - Presentation</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #0284c7;
+            --accent-color: #ea580c;
+            --danger-color: #dc2626;
+            --bg-color: aqua; /* Dark background like PPT Presenter Mode */
+            --slide-bg: #ffffff;
+            --text-main: #334155;
+            --text-dark: #0f172a;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden; /* Prevent page scrolling */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .presentation-container {
+            width: 125vw;
+            max-width: 1260px;
+            height: 99vh;
+            max-height: 900px;
+            position: relative;
+        }
+
+        /* Slide Show Mode Styling */
+        .slide {
+            background-color: var(--slide-bg);
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            padding: 2.5rem 3.5rem;
+            width: 100%;
+            height: 100%;
+            display: none; /* Hide all slides by default */
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-top: 8px solid var(--primary-color);
+            overflow-y: auto; /* Allow scrolling inside slide ONLY if screen is very small */
+        }
+
+        /* Only the active slide is displayed */
+        .slide.active {
+            display: flex;
+        }
+
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .slide-title {
+            color: var(--primary-color);
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        .slide-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Typography & Layouts */
+        h3 {
+            color: var(--text-dark);
+            margin-top: 0.75rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.15rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 0.5rem;
+        }
+
+        ul {
+            list-style-type: none;
+            margin-bottom: 1rem;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+        }
+
+        ul li::before {
+            content: "•";
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -6px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            align-items: start;
+        }
+
+        .card {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .definition-term {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .alert-box {
+            background-color: #fef2f2;
+            border-left: 4px solid var(--danger-color);
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            margin: 0.75rem 0;
+            color: #991b1b;
+            font-size: 0.9rem;
+        }
+
+        /* Global Image Centering Rule */
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Tables */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.5rem 0;
+            font-size: 0.85rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .styled-table thead tr {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .styled-table th, .styled-table td {
+            padding: 0.6rem 0.8rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f8fafc;
+        }
+
+        /* Title Slide Specifics */
+        .title-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-top: 8px solid var(--accent-color);
+        }
+
+        .title-slide h1 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .title-slide p {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+        }
+
+        .badge-container {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .badge {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .thank-you-banner {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 8px;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        /* Fixed Navigation Arrows */
+        .nav-arrows {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        /* =========================================================
+           NEW: Interactive Highlight Effect on Hover for ALL content 
+           ========================================================= */
+        
+        /* 1. Text Elements (Headings, Paragraphs, Lists, Definitions) */
+        h1, h2, h3, p, li, .definition-term {
+            transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+            border-radius: 4px;
+        }
+        h1:hover, h2:hover, h3:hover, p:hover, li:hover, .definition-term:hover {
+            color: var(--secondary-color) !important;
+            background-color: #f1f5f9;
+            transform: translateX(6px); /* Nudges text right for reading focus */
+        }
+
+        /* Fix for plain div text lists (like in Slide 17) */
+        .slide-content .card div > div:not(.badge):not(.card) {
+            transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+            border-radius: 4px;
+        }
+        .slide-content .card div > div:not(.badge):not(.card):hover {
+            color: var(--secondary-color) !important;
+            background-color: #f1f5f9;
+            transform: translateX(6px);
+        }
+
+        /* 2. Box / Container Elements (Cards, Alerts, Badges) */
+        .card, .alert-box, .badge {
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
+        }
+        .card:hover, .alert-box:hover, .badge:hover {
+            transform: translateY(-4px); /* Lifts the box slightly */
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1) !important;
+            border-color: var(--secondary-color) !important;
+        }
+
+        /* 3. Media Elements (Images & Videos) */
+        img, video {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+        }
+        img:hover, video:hover {
+            transform: scale(1.03); /* Slight zoom */
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.2);
+            filter: brightness(1.05); /* Slight brighten */
+        }
+
+        /* 4. Table specific highlights */
+        .styled-table tbody tr {
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+        .styled-table tbody tr:hover {
+            background-color: #e0f2fe !important;
+            transform: scale(1.01); /* Pop the row forward slightly */
+        }
+        /* ========================================================= */
+
+    </style>
+</head>
+<body>
+
+<div class="presentation-container">
+
+    <!-- Top Right Navigation Arrows -->
+    <div class="nav-arrows">
+        <button id="prevBtn" class="nav-btn" title="Previous Slide">&#10094;</button>
+        <button id="nextBtn" class="nav-btn" title="Next Slide">&#10095;</button>
+    </div>
+
+<!-- Slide 1: Title Slide -->
+    <section class="slide title-slide active" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); padding: 2rem;">
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center; max-width: 1050px; margin: 0 auto;">
+            
+            <!-- Top Category Pill Badge -->
+            <div style="background: var(--primary-color); color: white; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.4rem 1.25rem; border-radius: 20px; margin-bottom: 1.25rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+                Operational Safety & Emergency Protocols
+            </div>
+
+            <!-- Enhanced Main Title -->
+            <h1 style="font-size: 2.6rem; font-weight: 900; color: var(--primary-color); line-height: 1.2; letter-spacing: 0.02em; margin: 0; text-transform: uppercase; text-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                Accident & Disaster Management <br>
+                <span style="color: var(--accent-color); font-size: 2.1rem; font-weight: 800;">Manual & Contingency Plan</span>
+            </h1>
+
+            <!-- Decorative Accent Divider -->
+            <div style="width: 120px; height: 5px; background-color: var(--accent-color); border-radius: 3px; margin: 1.25rem 0;"></div>
+
+            <!-- Styled Author Card -->
+            <p style="font-size: 1.15rem; color: var(--text-main); margin-top: 0; margin-bottom: 1.5rem; background: white; padding: 0.6rem 1.75rem; border-radius: 8px; border: 1px solid #cbd5e1; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <strong>Prepared By:</strong> <span style="color: var(--primary-color); font-weight: 700;">[Sr.SC/TO Manish Kumar]</span>
+            </p>
+
+            <!-- Framed Featured Image -->
+            <div style="width: 100%; max-width: 850px; display: flex; justify-content: center;">
+                <img src="assets/1aa.jpg" alt="Accident and Disaster Management" style="width: 190%; height: 400px; object-fit: cover; border-radius: 12px; border: 4px solid white; box-shadow: 0 15px 25px -5px rgba(0,0,0,0.15), 0 5px 10px -5px rgba(0,0,0,0.05);">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Slide 2: Introduction & Objectives -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Introduction & Objectives</h2>
+        </div>
+        <div class="slide-content grid-2">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Introduction</h3>
+                <p>The purpose of the Disaster Management Manual is to provide step-by-step guidelines to all stakeholders responsible for dealing with different types of incidents, accidents, disasters, and emergencies.</p>
+                <div style="margin-top: 1.5rem;">
+                    <img src="assets/2a.jpg" alt="Construction site" style="width: 400px; height: 350px; object-fit: fill; border-radius: 6px;">
+                </div>
+            </div>
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Key Objectives</h3>
+                <ul style="margin-bottom: 0;">
+                    <li>Save lives and alleviate suffering.</li>
+                    <li>Provide help to stranded passengers and arrange their prompt evacuation.</li>
+                    <li>Instill a sense of security amongst all concerned by providing accurate information.</li>
+                    <li>Protect Metro Rail property.</li>
+                    <li>Ascertain the cause of the accident.</li>
+                    <li>Expedite the restoration of train operations.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 3: Serious Incidents & Classifications -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Serious Incidents & Classifications</h2>
+        </div>
+        <div class="slide-content grid-2">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Recognized Serious Incidents</h3>
+                <ul style="margin-bottom: 0;">
+                    <li>Fire, smoke emission, or explosion in metro trains/premises.</li>
+                    <li>Derailment of a train.</li>
+                    <li>Collision of trains.</li>
+                    <li>Security threats, terrorist attacks, or bomb explosions.</li>
+                    <li>Chemical or biological gas release in trains or stations.</li>
+                    <li>Natural calamities: cyclones, floods, and earthquakes.</li>
+                </ul>
+            </div>
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Operational Definitions</h3>
+                <div class="card" style="margin-bottom: 0.5rem; border: none; border-left: 3px solid var(--secondary-color);">
+                    <p><span class="definition-term">Incident:</span> Any event which causes or has the potential to cause delay or disruption to train services.</p>
+                </div>
+                <div class="card" style="margin-bottom: 0.5rem; border: none; border-left: 3px solid var(--secondary-color);">
+                    <p><span class="definition-term">Accident:</span> Any event which has the potential to or does actually cause loss of life, injury, and/or damage to property.</p>
+                </div>
+                <div class="card" style="margin-bottom: 0; border: none; border-left: 3px solid var(--secondary-color);">
+                    <p><span class="definition-term">Emergency / Disaster:</span> Events that may or may not necessarily be the outcome of train accidents, but have the potential to cause loss of life or injury to human beings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 4: Command, Control & Coordination - Roles -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Command, Control and Coordination</h2>
+            <p class="slide-subtitle" style="color: var(--text-main); font-size: 1.1rem; margin-top: 0.25rem;">Emergency Rescue Situations on Main Line</p>
+        </div>
+        <div class="slide-content grid-2">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Control Entities</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>OCC:</strong> Responsible for overall control and coordination.</li>
+                    <li><strong>OCS:</strong> Responsible for overall control and coordination.</li>
+                    <li><strong>OHE, P-Way, S&T, and RS departments:</strong> Provide technical assistance to OCC/OCS and manage site restoration work.</li>
+                </ul>
+            </div>
+
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Station & Security Roles</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Station Staff:</strong> Make appropriate announcements and provide information to customers.</li>
+                    <li><strong>Station TO:</strong> Provide up-to-date information and operate trains in compliance with applicable rules, procedures, and OCC instructions.</li>
+                    <li><strong>Metro Police:</strong> Responsible for securing the incident site.</li>
+                    <li><strong>Security Staff:</strong> Assist Metro Police, Fire Services, Medical Services, and station staff.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5: Command, Control & Coordination - Appointment -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Command, Control and Coordination</h2>
+            <p class="slide-subtitle" style="color: var(--text-main); font-size: 1.1rem; margin-top: 0.25rem;">Appointment of OCS & Information for Help</p>
+        </div>
+        <div class="slide-content grid-2">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Appointment of OCS</h3>
+                <p style="margin-bottom: 0.5rem; font-weight: bold;">Change of command at the scene:</p>
+                <ul style="margin-bottom: 1rem;">
+                    <li>Train Operator.</li>
+                    <li>Station Manager, Station Controller, or Train Operations Supervisor.</li>
+                    <li>AOM / SOM.</li>
+                    <li>Dy HOD/O.</li>
+                    <li>Other members of the DMT.</li>
+                </ul>
+                <div class="alert-box" style="background: #e0f2fe; border-left: 5px solid #0284c7; padding: 1rem; border-radius: 8px; margin-bottom: 0; color: #0369a1;">
+                    If none are present, the OCC shall appoint an OCS as per the instructions of the ED/O from the available staff.
+                </div>
+            </div>
+
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Information for Help</h3>
+                <p style="margin-bottom: 0.5rem; font-weight: bold;">Information for other agencies like Fire Services or Medical Assistance:</p>
+                <ul style="margin-bottom: 0;">
+                    <li>Caller ID.</li>
+                    <li>Nature of the problem.</li>
+                    <li>Type of assistance required and the location of the incident or accident.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 6: Command, Control & Coordination - Procedure (OCC) -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Command, Control and Coordination</h2>
+            <p class="slide-subtitle" style="color: var(--text-main); font-size: 1.1rem; margin-top: 0.25rem;">PROCEDURE: Duties of the OCM of OCC</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">The OCM of OCC shall:</h3>
+                <div class="grid-2">
+                    <ul style="margin-bottom: 0;">
+                        <li>Appoint the OCS.</li>
+                        <li>Coordinate all field activities and requests through the OCS.</li>
+                        <li>Notify members of the DMT, all NMRC departments, and personnel.</li>
+                        <li>Coordinate the safe movement of all trains (including those involved at the incident site).</li>
+                        <li>Request Metro Police assistance at critical stations for crowd control.</li>
+                    </ul>
+                    <ul style="margin-bottom: 0;">
+                        <li>Keep stations and TOs well-informed of the status.</li>
+                        <li>Ensure system-wide public address announcements are made frequently.</li>
+                        <li>Coordinate with and assist the OCS in restoration activities.</li>
+                        <li>Provide the OCS with frequent updates.</li>
+                        <li>Inform the CRS and Police Commissioner (in case of injuries, etc.).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 7: Command, Control & Coordination - Procedure (OCS) -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Command, Control and Coordination</h2>
+            <p class="slide-subtitle" style="color: var(--text-main); font-size: 1.1rem; margin-top: 0.25rem;">PROCEDURE: Duties of the OCS</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">The OCS shall:</h3>
+                <div class="grid-2">
+                    <ul style="margin-bottom: 0;">
+                        <li>Ensure the safety of passengers and personnel at the site.</li>
+                        <li>Ascertain that all injured and stranded passengers have been safely evacuated.</li>
+                        <li>Ensure that all personnel at the site work efficiently.</li>
+                        <li>Control and coordinate all field activities.</li>
+                        <li>Coordinate with all internal and external agencies.</li>
+                    </ul>
+                    <ul style="margin-bottom: 0;">
+                        <li>Appoint intelligent staff with a TETRA set to act as a link between the OCC and OCS.</li>
+                        <li>Direct all inquiries and requests from the jurisdictional police to the senior Metro official at the scene.</li>
+                        <li>Appoint individuals to provide public address announcements at 5-minute intervals.</li>
+                        <li>Maintain a log of all events and activities.</li>
+                        <li>Establish a command post at the incident site.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 8: Civil Structure & Station SOPs -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Civil Structure & Station SOPs</h2>
+        </div>
+        <div class="slide-content grid-2">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Civil and Structural Resilience</h3>
+                <ul>
+                    <li><strong>Seismic Design:</strong> Located in Seismic Zone IV, the elevated track and infrastructure are designed to withstand an earthquake of intensity 7 on the Richter scale.</li>
+                    <li><strong>Building Standards:</strong> Metro Station buildings are categorized as assembly buildings. Fire safety equipment is installed strictly per the National Building Code requirements.</li>
+                </ul>
+            </div>
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Standard Operating Procedure (SOP) – Station</h3>
+                <ul style="margin-bottom: 0;">
+                    <li>Immediate response to station fire alarms.</li>
+                    <li>Execution of emergency evacuation protocols.</li>
+                    <li>Rapid mobilization of emergency services.</li>
+                    <li>Systematic response to local incidents and crowd management.</li>
+                    <li>Deployment of Emergency Stop Plunger (ESP) & Platform Supervisory Booth (PSB).</li>
+                </ul>
+                <img src="assets/4a.jpg" alt="Construction site" style="width: 300px; height: 300px; object-fit: fill; border-radius: 6px;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 9: Passenger Safety Provisions at Stations -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Passenger Safety Provisions at Stations</h2>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);">
+                <p style="margin-bottom: 1rem; font-weight: bold; color: var(--primary-color);">Designed in strict accordance with the National Building Code (NBC) and National Fire Protection Association (NFPA) guidelines:</p>
+                <div class="badge-container" style="gap: 0.75rem; display: grid; grid-template-columns: repeat(3, 1fr);">
+                    <div class="card" style="margin:0; border-left: 4px solid var(--secondary-color);">🚨 Fire detection alarm & suppression system</div>
+                    <div class="card" style="margin:0; border-left: 4px solid var(--secondary-color);">🪜 Firemen staircase and designated emergency exits</div>
+                    <div class="card" style="margin:0; border-left: 4px solid var(--secondary-color);">💡 Emergency ventilation, lighting & signage</div>
+                    <div class="card" style="margin:0; border-left: 4px solid var(--secondary-color);">🛠️ Dedicated Disaster Management facilities</div>
+                    <div class="card" style="margin:0; border-left: 4px solid var(--secondary-color);">🏥 Medical facilities and first-aid integration</div>
+                    <div class="card" style="margin:0; border-left: 4px solid var(--secondary-color);">🧯 Advanced fire-fighting infrastructure</div>
+                    <div class="card" style="margin:0; border-left: 4px solid var(--secondary-color);">📢 Passenger Information System (PIDS / PAS)</div>
+                    <div class="card" style="margin:0; border-left: 4px solid var(--secondary-color);">📹 Comprehensive CCTV surveillance</div>
+                    <div class="card" style="margin:0; border-left: 4px solid var(--secondary-color);">barrier Emergency-override AFC gate control</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 10: Fire Fighting Facilities & Detection Systems -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Fire Fighting Facilities & Detection Systems</h2>
+            <span class="slide-number"></span>
+        </div>
+        <div class="slide-content">
+            <p>Comprehensive fire detection, suppression, and monitoring systems are integrated across all station panels, detectors, and suppression devices.</p>
+            <h3>Key System Components</h3>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-top: 0.5rem;">
+                <div class="badge">Fire Hydrants</div>
+                <div class="badge">Manual Call Points (MCP)</div>
+                <div class="badge">Portable Extinguishers</div>
+                <div class="badge">Smoke & Heat Detectors</div>
+                <div class="badge">Fire Alarm Panel</div>
+                <div class="badge">Dedicated Fire Tanks</div>
+                <div class="badge">Inert Gas Flooding (ASS)</div>
+                <div class="badge">Fire Brigade Draw-off</div>
+                <div class="badge">Dedicated Pump Rooms</div>
+                <div class="badge">Sprinklers</div>
+                <div class="badge">Smoke Screens</div>
+            </div>
+            
+            <!-- Side-by-side figures, continuing downwards -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1.5rem; text-align: center;">
+                <div>
+                    <img src="assets/6a.jpg" alt="Fire Hose Cabinate" style="width: 60%; height: auto; border-radius: 6px;">
+                    <p style="font-size: 0.85rem; font-weight: bold; margin-top: 0.35rem; color: var(--primary-color);">Fire Hose Cabinet (FHC)</p>
+                </div>
+                <div>
+                    <img src="assets/6b.jpg" alt="Alarm Panel" style="width: 40%; height: auto; border-radius: 6px;">
+                    <p style="font-size: 0.85rem; font-weight: bold; margin-top: 0.35rem; color: var(--primary-color);">Manual Call Points (MCP)</p>
+                </div>
+                <div>
+                    <img src="assets/6c.jpg" alt="Gas Flooding" style="width: 40%; height: auto; border-radius: 6px;">
+                    <p style="font-size: 0.85rem; font-weight: bold; margin-top: 0.35rem; color: var(--primary-color);">Smoke Detector</p>
+                </div>
+                <div>
+                    <img src="assets/6d.jpg" alt="Sprinklers" style="width: 40%; height: auto; border-radius: 6px;">
+                    <p style="font-size: 0.85rem; font-weight: bold; margin-top: 0.35rem; color: var(--primary-color);">Visual cum sound Indicator</p>
+                </div>
+                <div>
+                    <img src="assets/6e.jpg" alt="MCP Layout" style="width: 60%; height: auto; border-radius: 6px;">
+                    <p style="font-size: 0.85rem; font-weight: bold; margin-top: 0.35rem; color: var(--primary-color);">FACP</p>
+                </div>
+                <div>
+                    <img src="assets/6f.jpg" alt="Pump Room" style="width: 70%; height: auto; border-radius: 6px;">
+                    <p style="font-size: 0.85rem; font-weight: bold; margin-top: 0.35rem; color: var(--primary-color);">Pump Room</p>
+                </div>
+                <div>
+                    <img src="assets/6g.jpg" alt="Pump Room" style="width: 40%; height: auto; border-radius: 6px;">
+                    <p style="font-size: 0.85rem; font-weight: bold; margin-top: 0.35rem; color: var(--primary-color);">Fire Brigade Draw-off</p>
+                </div>
+                <div>
+                    <img src="assets/6h.jpg" alt="Pump Room" style="width: 70%; height: auto; border-radius: 6px;">
+                    <p style="font-size: 0.85rem; font-weight: bold; margin-top: 0.35rem; color: var(--primary-color);">Fire Extingusher</p>
+                </div>
+                <div>
+                    <img src="assets/6i.jpg" alt="Pump Room" style="width: 50%; height: auto; border-radius: 6px;">
+                    <p style="font-size: 0.85rem; font-weight: bold; margin-top: 0.35rem; color: var(--primary-color);">Sprinklers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 11: Medical Facilities & Passenger Information Systems -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Medical Facilities & Information Systems</h2>
+        </div>
+        <div class="slide-content grid-2">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Medical Facilities</h3>
+                <ul>
+                    <li><strong>Emergency Coordination:</strong> Seamless coordination with private and government ambulance services (Dial 102 or 1098).</li>
+                </ul>
+                <img src="assets/7a.jpg" alt="Medical Room" style="width: 50%; height: auto; border-radius: 6px;">
+                <ul>
+                    <li><strong>First Aid:</strong> Fully equipped first-aid boxes are readily available across all stations and onboard all trains.</li>
+                </ul>
+                <img src="assets/7b.jpg" alt="First Aid Equipment" style="width: 50%; height: auto; border-radius: 6px;">
+            </div>
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Passenger Information System (PIDS/PAS)</h3>
+                <ul>
+                    <li><strong>Visual Displays (PIDS):</strong> Double-sided PIDS boards are installed on each platform; single-sided PIDS boards serve the concourse area.</li>
+                </ul>
+                <img src="assets/7c.jpg" alt="PIDS Display Board" style="width: 50%; height: auto; border-radius: 6px;">
+                <ul>
+                    <li><strong>Audio System (PAS):</strong> The Public Address System ensures clear audio announcements covering the entire station layout.</li>
+                </ul>
+                <div style="display: flex; gap: 0.5rem; justify-content: center;">
+                    <img src="assets/7d.jpg" alt="Construction site" style="width: 250px; height: 200px; object-fit: fill; border-radius: 6px;">
+                    <img src="assets/7e.jpg" alt="Platform PAS" style="width: 45%; height: auto; border-radius: 6px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 12: CCTV, AFC Control Equipment & Signage -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">CCTV, AFC Control Equipment & Signage</h2>
+        </div>
+        <div class="slide-content grid-2">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">CCTV Surveillance & AFC Control</h3>
+                <ul>
+                    <li><strong>Strategic Coverage:</strong> Cameras cover concourse and platform areas, including TOM, AFC gates, lifts, escalators, and entry/exit points.</li>
+                    <li><strong>Monitoring & Recording:</strong> A CCTV Man-Machine Interface (MMI) is active in the Station Control Room (SCR). Recording hardware is secured in the Telecom Equipment Room.</li>
+                </ul>
+                <div style="display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1rem;">
+                    <img src="assets/8a.jpg" alt="CCTV MMI" style="width: 50%; height: auto; border-radius: 6px;">
+                </div>
+                <ul>
+                    <li><strong>AFC Emergency Mode:</strong> Computerized control of AFC gates is managed from the SCR. In emergencies, all gates switch to <em>free-mode</em> for rapid evacuation.</li>
+                </ul>
+                <div style="display: flex; gap: 0.5rem; justify-content: center;">
+                    <img src="assets/8b.jpg" alt="AFC Gates" style="width: 90%; height: auto; border-radius: 6px;">
+                </div>
+            </div>
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Safety & Directional Signage</h3>
+                <p style="margin-bottom: 1rem; font-size: 0.95rem;">Clear, standardized signage guides passengers during normal operations and emergencies:</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: center; text-align: center;">
+                    <div>
+                        <img src="assets/8e.jpg" alt="Exit Signage" style="width: 70%; height: auto; border-radius: 6px;">
+                        <p style="font-size: 0.8rem; font-weight: bold; margin-top: 0.25rem; color: var(--primary-color);">Exit Signage</p>
+                    </div>
+                    <div>
+                        <img src="assets/8f.jpg" alt="Emergency Exit" style="width: 90%; height: auto; border-radius: 6px;">
+                        <p style="font-size: 0.8rem; font-weight: bold; margin-top: 0.25rem; color: var(--primary-color);">Fireman Staircase</p>
+                    </div>
+                    <div>
+                        <img src="assets/8g.jpg" alt="Assembly Area" style="width: 90%; height: auto; border-radius: 6px;">
+                        <p style="font-size: 0.8rem; font-weight: bold; margin-top: 0.25rem; color: var(--primary-color);">Fire Exit</p>
+                    </div>
+                    <div>
+                        <img src="assets/8h.jpg" alt="Fire Equipment Sign" style="width: 100%; height: auto; border-radius: 6px;">
+                        <p style="font-size: 0.8rem; font-weight: bold; margin-top: 0.25rem; color: var(--primary-color);">Emergency Exit Sign</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 13: Rolling Stock Safety & Onboard Equipment -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Rolling Stock Safety & Onboard Equipment</h2>
+        </div>
+        <div class="slide-content grid-2">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Train Structural & Safety Features</h3>
+                <ul>
+                    <li><strong>Fire Retardant:</strong> Extensive use of non-inflammable materials in the body structure.</li>
+                    <li><strong>Underfloor Protection:</strong> Coach underfloors are rated for a 30-minute Fire Resistance Period (FRP).</li>
+                    <li><strong>Crashworthiness:</strong> Body structure is engineered to absorb collision energy and resist deformation.</li>
+                    <li><strong>Emergency Lighting:</strong> 1-hour battery backup for internal emergency lighting.</li>
+                    <li><strong>Emergency Announcement:</strong> Train is equipped with PA system having pre-recorded announcements.</li>
+                </ul>
+                <div style="display: flex; justify-content: center; margin-top: 1rem;">
+                    <img src="assets/9b.jpg" alt="Extinguisher" style="width: 85%; height: auto; border-radius: 6px;">
+                </div>
+            </div>
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Onboard Emergency Equipment</h3>
+                <ul>
+                    <li>Fire extinguishers provisioned inside every train car.</li>
+                    <li>Emergency doors and emergency ventilation systems.</li>
+                    <li>Exterior release devices accessible at selected doors.</li>
+                    <li>Direct emergency communication channels between passengers, Train Operator (TO), and Operation Control Centre (OCC).</li>
+                </ul>
+                <div style="display: flex; justify-content: center; margin-top: 1rem;">
+                    <img src="assets/9a.jpg" alt="Extinguisher" style="width: 70%; height: auto; border-radius: 6px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 14: Evacuation & Passenger Communication Systems -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Evacuation & Communication Systems</h2>
+        </div>
+        <div class="slide-content grid-2">
+            
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Fire Protection & Evacuation Protocols</h3>
+                <ul>
+                    <li><strong>30-Minute Shield:</strong> Underfloor 30-minute FRP allows critical time to transit to the nearest station during a fire incident.</li>
+                    <li><strong>Emergency Doors:</strong> Designated doors facilitate rapid passenger evacuation.</li>
+                </ul>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.95rem;">
+                    <thead>
+                        <tr style="background-color: #f1f5f9; text-align: left;">
+                            <th style="padding: 0.5rem; border: 1px solid #cbd5e1; color: var(--primary-color); width: 30%;">Device</th>
+                            <th style="padding: 0.5rem; border: 1px solid #cbd5e1; color: var(--primary-color); width: 25%;">Location</th>
+                            <th style="padding: 0.5rem; border: 1px solid #cbd5e1; color: var(--primary-color); width: 45%;">Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 0.4rem 0.5rem; border: 1px solid #cbd5e1; font-weight: bold;">Emergency Egress Device (EED)</td>
+                            <td style="padding: 0.4rem 0.5rem; border: 1px solid #cbd5e1;">Every door</td>
+                            <td style="padding: 0.4rem 0.5rem; border: 1px solid #cbd5e1;">Interior passenger exit</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.4rem 0.5rem; border: 1px solid #cbd5e1; font-weight: bold;">Emergency Access Device (EAD)</td>
+                            <td style="padding: 0.4rem 0.5rem; border: 1px solid #cbd5e1;">L2 / R3 doors</td>
+                            <td style="padding: 0.4rem 0.5rem; border: 1px solid #cbd5e1;">Exterior rescue team access</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="display: flex; gap: 0.5rem; justify-content: center; margin-top: 1rem;">
+                    <img src="assets/10a.jpg" alt="Egress Device" style="width: 90%; height: auto; border-radius: 6px; margin: 0 auto;">
+                </div>
+            </div>
+
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Passenger Communication System</h3>
+                <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                    <div style="flex: 1; display: flex; flex-direction: column; gap: 1rem;">
+                        <ul style="margin-bottom: 0;">
+                            <li><strong>Public Address:</strong> Trains feature a robust PA system integrated with automated, pre-recorded emergency guidance announcements.</li>
+                            <li><strong>PECU:</strong> Provision of Passenger Emergency Communication Units (PECU) allows immediate two-way contact with train operations staff during distress.</li>
+                        </ul>
+                        <img src="assets/10c.jpg" alt="PA Speaker" style="display: block; margin: 0; width: 80%; max-width: 280px; height: auto; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    </div>
+                    <img src="assets/10d.jpg" alt="PECU Unit" style="display: block; margin: 0; width: 150px; height: auto; object-fit: contain; border-radius: 6px; flex-shrink: 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Slide 15: Signaling, Electrical & Communication Redundancy -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Signaling, Electrical & Communication Redundancy</h2>
+        </div>
+        <div class="slide-content grid-3">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Signaling (CATC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li>Continuous Automatic Train Control ensures safe movement & speed control.</li>
+                    <li>Controls platform door opening.</li>
+                    <li>Emergency Stop Plunger (ESP) integration.</li>
+                    <li>Skip station, Train hold & Keep doors closed functions.</li>
+                    <li>Emergency/Incident mode in AFC gates.</li>
+                </ul>
+            </div>
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Electrical Systems</h3>
+                <ul style="margin-bottom: 0;">
+                    <li>Dual power redundancy (Normal & Emergency supplies).</li>
+                    <li>Backup DG sets & Uninterruptible Power Supply (UPS).</li>
+                    <li>Emergency Trip System (ETS).</li>
+                    <li>Robust ventilation, lighting, and pump/drainage infrastructure.</li>
+                </ul>
+            </div>
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--secondary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--secondary-color);">Communication</h3>
+                <ul style="margin-bottom: 0;">
+                    <li>Dedicated phone lines for UP Police, Ambulance (CATS), and Fire Services.</li>
+                    <li>Emergency mode in train radio and passenger alarm systems.</li>
+                    <li>TETRA system deployed across all stations, trains, depots, and OCC.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 16: Security Structure -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Security Structure (UP SSF)</h2>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);">
+                <p style="font-size: 1.2rem; margin-bottom: 1rem;">Internal security is managed by UP SSF, while UP Police handles law and order.</p>
+                <ul style="font-size: 1.1rem; margin-bottom: 0;">
+                    <li>Mandatory security checks of all commuters entering paid areas.</li>
+                    <li>Quick Reaction Teams (QRT) stationed for rapid emergency deployment.</li>
+                    <li>Specialized Bomb Disposal Squads and Dog Squads.</li>
+                </ul>
+                <div style="display: flex; gap: 3rem; margin-top: 1.5rem; justify-content: center; align-items: center;">
+                    <img src="assets/12a.jpg" alt="Construction site" style="width: 45%; height: auto; border-radius: 6px;">
+                    <img src="assets/12b.jpg" alt="QRT Team" style="width: 45%; height: auto; border-radius: 6px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 17: Disaster Management Team (DMT) -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Disaster Management Team (DMT)</h2>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);">
+                <p style="font-size: 1.2rem; margin-bottom: 1rem;"><strong>Objective:</strong> To handle disasters effectively in a systematic, hierarchical order.</p>
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color); font-size: 1.4rem;">Core Committee Members:</h3>
+                <div style="display: grid; grid-template-columns: 1fr; font-size: 1.2rem; margin-top: 1rem; gap: 0.5rem; line-height: 1.6;">
+                    <div>• <strong>Chairman & Coordinator:</strong> HOD/Ops</div>
+                    <div>• <strong>Members:</strong></div>
+                    <div style="padding-left: 2rem;">- Dy HOD/Ops</div>
+                    <div style="padding-left: 2rem;">- Dy HOD/S&T</div>
+                    <div style="padding-left: 2rem;">- Dy HOD/RS</div>
+                    <div style="padding-left: 2rem;">- Dy HOD/Traction</div>
+                    <div style="padding-left: 2rem;">- Dy HOD/E&M</div>
+                    <div style="padding-left: 2rem;">- Dy HOD/Civil&Track</div>
+                    <div style="padding-left: 2rem;">- Dy HOD/Safety</div>
+                    <div style="padding-left: 2rem;">- Security Manager</div>
+                    <div style="padding-left: 2rem;">- Fire Officer</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 18: Types of Disasters -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Types of Disasters</h2>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 1.5rem;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color); font-size: 1.5rem;">Man-Made Disasters</h3>
+                <ul style="font-size: 1.2rem; margin-bottom: 0;">
+                    <li>Fire</li>
+                    <li>Derailment / Collision</li>
+                    <li>Stampede</li>
+                    <li>Terrorist Attacks</li>
+                    <li>Bomb Threats</li>
+                    <li>Chemical / Biological Gas Release</li>
+                    <li>Sabotage</li>
+                </ul>
+            </div>
+
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color); font-size: 1.5rem;">Natural Calamities</h3>
+                <ul style="font-size: 1.2rem; margin-bottom: 0;">
+                    <li>Earthquakes</li>
+                    <li>Floods</li>
+                    <li>Severe Wind Storms</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 19: Fire Management & Electrical Safety -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Fire Safety & Extinguishing Protocols</h2>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);">
+                <p style="font-size: 1.15rem; margin-bottom: 1rem;">Fire is one of the most critical hazards in metro operations. Key threat areas include:</p>
+                <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem;">
+                    <div style="font-size: 1.15rem; font-weight: 700; color: var(--primary-color); background-color: #f8fafc; padding: 0.75rem 1rem; border-left: 4px solid var(--danger-color); border-radius: 4px;">
+                        Electrical Equipment Fire
+                    </div>
+                    <div style="font-size: 1.15rem; font-weight: 700; color: var(--primary-color); background-color: #f8fafc; padding: 0.75rem 1rem; border-left: 4px solid var(--danger-color); border-radius: 4px;">
+                        Train Fire
+                    </div>
+                    <div style="font-size: 1.15rem; font-weight: 700; color: var(--primary-color); background-color: #f8fafc; padding: 0.75rem 1rem; border-left: 4px solid var(--danger-color); border-radius: 4px;">
+                        Station Premises Fire
+                    </div>
+                </div>
+
+                <div class="alert-box" style="background: #fee2e2; border-left: 5px solid #ef4444; padding: 1.2rem; border-radius: 8px; margin: 1.5rem 0;">
+                    <strong style="color: #b91c1c; font-size: 1.25rem;">⚠️ CRITICAL SAFETY RULE:</strong><br>
+                    <span style="font-size: 1.15rem; font-weight: bold;">No water shall EVER be used to extinguish an electrical fire.</span>
+                </div>
+
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Immediate Fire Actions</h3>
+                <ul style="font-size: 1.1rem; margin-bottom: 0;">
+                    <li><strong>Power De-energization:</strong> Power supply must be cut off immediately by informing the Traction Power Controller.</li>
+                    <li><strong>Suppression Methods:</strong> Use inert gas flooding and clean-agent extinguishers instead of water for electrical systems.</li>
+                </ul>
+                
+                <div style="display: flex; gap: 2rem; margin-top: 1.5rem; justify-content: center; align-items: center;">
+                    <img src="assets/13c.jpg" alt="CO2 Extinguisher" style="width: 30%; height: auto; border-radius: 6px;">
+                    <img src="assets/13d.jpg" alt="Power Switch" style="width: 30%; height: auto; border-radius: 6px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 20: Fire Procedures – Train (Train Operator Duties) -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">FIRE IN A METRO TRAIN</h2>
+            <p class="slide-subtitle">Subtitle: Emergency Response and Duties of Operating Staff</p>
+        </div>
+        <div class="slide-content" style="display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 2rem; align-items: center;">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Train Operator (TO)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Initial Alert & Assessment:</strong> Immediately inform the Operational Control Centre (OCC) and assess the fire to decide if the train can safely reach the next station.</li>
+                    <li><strong>Onboard Crowd Control:</strong> Move passengers away from affected cars into safer coaches; request traveling Metro staff to assist in relief work.</li>
+                    <li><strong>Transit to Station (If Safe):</strong> Drive to the next station while informing OCC and using the PA system to tell passengers not to panic and prepare to vacate. Give evacuation priority to the aged, handicapped, women, and children.</li>
+                    <li><strong>Disabled Train Protocol (If Unsafe):</strong> If unsafe to proceed or disabled, advise OCC, switch mode selector to 'OFF', and trip all circuit breakers.</li>
+                    <li><strong>Firefighting & Evacuation:</strong> Use onboard fire extinguishers. If extinguished, proceed under OCC ATC instructions; if uncontrolled, immediately prepare passenger evacuation.</li>
+                    <li><strong>Platform Evacuation:</strong> If at a platform, open all doors on the platform side, instruct passengers to vacate, inform OCC/Station Controller, and seek station staff help.</li>
+                </ul>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;">
+                <video controls autoplay muted loop style="display: block; margin: 0 auto; width: 85%; height: auto; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);">
+                    <source src="assets/16a.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 21: Fire Procedures – Train (Controller Duties) -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">FIRE IN A METRO TRAIN</h2>
+            <p class="slide-subtitle">Subtitle: Emergency Response and Duties of Operating Staff</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Traffic Controller (TC) / Chief Controller (CC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Agency Mobilization:</strong> Inform internal/external agencies and adjoining station staff to rush to the site (or adjacent stations if mid-section) for evacuation support.</li>
+                    <li><strong>Line Protection:</strong> If stopped mid-section, stop all train movement on adjacent tracks immediately.</li>
+                    <li><strong>Station Clearing:</strong> Vacate waiting passengers from adjacent stations to assist evacuees and facilitate emergency vehicle/medical movement.</li>
+                    <li><strong>Coordination & Communication:</strong> Ask CC to alert the Disaster Management Team (DMT) and required departments. Expedite medical/fire services, regulate train services, and keep stations informed of delays.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 22: Fire Procedures – Station Premises (Station Controller Duties) -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">FIRE IN A METRO STATION</h2>
+            <p class="slide-subtitle">Subtitle: Multi-Agency Coordination and Duties of Station Personnel</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Station Controller / Manager (SC/SM)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Alert & PA Evacuation:</strong> Inform fire personnel and OCC. Announce via PA to vacate the platform using earmarked exit routes.</li>
+                    <li><strong>Crowd & Access Control:</strong> Inform security/police to maintain order and control crowds. Stop ticket booking and sales immediately.</li>
+                    <li><strong>Containment:</strong> Close station entry and platform exits near the fire to prevent access. If platform exits are blocked, prevent access and disperse existing passengers.</li>
+                    <li><strong>Fire Suppression & Power:</strong> Use fire extinguishers and suppression systems with staff help. Advise electrical staff to cut power to the affected area.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 23: Fire Procedures – Station Premises (Traffic Controller Duties) -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">FIRE IN A METRO STATION</h2>
+            <p class="slide-subtitle">Subtitle: Multi-Agency Coordination and Duties of Station Personnel</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 1rem;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Traffic Controller (TC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Emergency Notification:</strong> Alert fire services, medical teams, DMT, and the Traction Power Controller (TPC) regarding electrical safety.</li>
+                    <li><strong>Service Regulation & PA:</strong> Regulate train services on both sides of the station and inform all affected stations of delays. Make regular system-wide announcements explaining train regulations.</li>
+                    <li><strong>Platform Bypass Protocol:</strong> If tracks are safe, advise approaching Train Operators to instruct passengers not to detrain. Open train doors exclusively to evacuate waiting passengers from the platform.</li>
+                </ul>
+            </div>
+            
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 1rem;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Duties of the Traction Power Controller (TPC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Power De-energization:</strong> Instruct station electrical staff to switch off power specifically in the fire-affected station area.</li>
+                    <li><strong>Firefighting Support:</strong> Advise maintenance staff to fight the fire using available equipment.</li>
+                </ul>
+            </div>
+            
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--secondary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--secondary-color);">Duties of the Security Controller</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Police & Fire Coordination:</strong> Coordinate with OCC, alert SSF/Local Police, and request Delhi Fire Services assistance.</li>
+                    <li><strong>Staff Deployment:</strong> Deploy security staff to assist with evacuation, crowd control, and active firefighting.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 24: Train Collision - System Overview -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">TRAIN COLLISION</h2>
+            <p class="slide-subtitle">Subtitle: Emergency Reporting Protocols and Multi-Department Duties</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">System Overview & Initial Reporting Protocol</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Automatic Protection:</strong> The Automatic Train Protection (ATP) system ensures train separation and zero collision during normal operations.</li>
+                    <li><strong>Degraded Mode Vigilance:</strong> Because ATP protection is not available in Restricted Operational Mode (ROS), Restricted Manual (RM), and Cut Out Modes, Train Operators working in degraded modes must be extra vigilant to ensure safe train movement.</li>
+                    <li><strong>Witness Reporting:</strong> Any employee witnessing, discovering, or being involved in a train collision must immediately inform the Operational Control Centre (OCC) and provide the following vital details:
+                        <ul style="margin-bottom: 0;">
+                            <li>Caller's name and identification.</li>
+                            <li>Reason for the call and train identification.</li>
+                            <li>Exact location of the collision.</li>
+                            <li>Whether medical assistance is required.</li>
+                            <li>The presence of any smoke or fire.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 25: Train Collision - Train Operator Duties -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">TRAIN COLLISION</h2>
+            <p class="slide-subtitle">Subtitle: Emergency Reporting Protocols and Multi-Department Duties</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Train Operator (TO)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Immediate Alert:</strong> In the event of a collision involving their train, the TO must immediately inform the OCC and give as many details as possible.</li>
+                    <li><strong>Track Protection:</strong> If the adjacent track is infringed, the TO's first and foremost duty is to protect the adjacent track to avoid multiple accidents.</li>
+                    <li><strong>Passenger Communication:</strong> Inform passengers about the incident via the public address system, advising them about the rescue and relief arrangements being made.</li>
+                    <li><strong>Injury Assessment & First Aid:</strong> Quickly assess the situation regarding passenger injuries, give the OCC as much detail as available, render first aid to passengers, and check for damage to the train.</li>
+                    <li><strong>Evacuation Protocol:</strong> Seek the OCC's permission before initiating any passenger evacuation, and strictly act as per the instructions of the OCC.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 26: Train Collision - TC & SC Duties (Combined) -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">TRAIN COLLISION</h2>
+            <p class="slide-subtitle">Subtitle: Emergency Reporting Protocols and Multi-Department Duties</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 1rem;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Traffic Controller (TC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Site Protection:</strong> Immediately block all train movements on both tracks to protect the accident site.</li>
+                    <li><strong>Emergency Mobilization:</strong> Inform the Disaster Management Team (DMT) and other designated departments and personnel, and mobilize medical assistance as required.</li>
+                    <li><strong>Relief Train Deployment:</strong> Inform the train depot of the concerned line to be in immediate readiness to move the Rescue Relief Train.</li>
+                    <li><strong>Staff & Service Regulation:</strong> Instruct station managers to depute station staff for passenger evacuation and medical aid. Regulate train services and inform all stations on the route regarding service effects and delays.</li>
+                    <li><strong>Environmental & Traffic Control:</strong> Activate the tunnel ventilation system if the collision is in an underground section, arrange for PA announcements to be made on trains and at stations, and initiate operating procedures to relieve train congestion at the collision site.</li>
+                </ul>
+            </div>
+            
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Duties of the Station Controller (SC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>OCC & Agency Alert:</strong> Immediately inform the OCC, arrange for immediate medical assistance, and inform the DMRP/Local Police.</li>
+                    <li><strong>Resource Mobilization:</strong> Mobilize station staff for the rapid evacuation of passengers and the rendering of first aid to the injured.</li>
+                    <li><strong>Crowd Information:</strong> Continuously inform passengers awaiting at the station of likely service delays.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 27: Train Collision - TPC Duties -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">TRAIN COLLISION</h2>
+            <p class="slide-subtitle">Subtitle: Emergency Reporting Protocols and Multi-Department Duties</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Traction Power Controller (CTPC/TPC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Power De-energization:</strong> Normally, no power supply switching OFF decision shall be taken independently by the CTPC/TPC; however, if instructed by the Traffic Controller, the OHE/33kV power supply shall be switched OFF on the respective lines.</li>
+                    <li><strong>Field Communication:</strong> Convey the emergency message to senior officers and field staff as per the situation.</li>
+                    <li><strong>Restoration Dispatch:</strong> Instruct OHE staff to reach the accident site by the quickest available means to provide discharge rods so that site restoration work can commence safely.</li>
+                    <li><strong>Information Logging:</strong> Collect and report vital information to senior officers, including the caller's ID, train ID, collision location/mast number, adjacent line obstruction status, required medical aid, and presence of fire or smoke.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 28: Train Derailment - Train Operator Duties -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">TRAIN DERAILMENT</h2>
+            <p class="slide-subtitle">Subtitle: Emergency Response and Duties of Operating Staff</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Train Operator (TO)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Track Protection:</strong> The TO's first and foremost duty is to protect the adjacent track as per authorized instructions to avoid a secondary accident.</li>
+                    <li><strong>Train Security & PA Communication:</strong> Secure the train immediately. Inform passengers of the problem and the rescue/relief actions being taken via the public address system.</li>
+                    <li><strong>Initial Alert & Information:</strong> Immediately inform the Operational Control Centre (OCC) and provide the following vital details:
+                        <ul>
+                            <li>Train Operator ID and exact train location.</li>
+                            <li>Train description and current condition.</li>
+                            <li>Whether the adjacent track is obstructed or clear.</li>
+                            <li>Passenger injury status and the presence of any smoke or fire.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Evacuation Protocol:</strong> Seek specific instructions from the OCC before initiating any passenger evacuation.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 29: Train Derailment - Traffic Controller Duties -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">TRAIN DERAILMENT</h2>
+            <p class="slide-subtitle">Subtitle: Multi-Agency Coordination and Control Room Duties</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Traffic Controller (TC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Immediate Train Halt:</strong> Instruct Train Operators of all trains approaching the derailment site on both tracks to stop their trains immediately and report their positions.</li>
+                    <li><strong>Agency & Staff Mobilization:</strong> Notify the Disaster Management Team (DMT), all concerned departments, Metro Police, security personnel, and station managers on the affected line so they can inform waiting passengers of likely delays.</li>
+                    <li><strong>Medical & Relief Deployment:</strong> Mobilize medical assistance immediately and inform the train depot of the concerned line to be in readiness to move the Rescue Relief Train.</li>
+                    <li><strong>Evacuation & Service Regulation:</strong> Instruct station managers to depute station staff for passenger evacuation and medical aid. Regulate train services and inform all stations on the route regarding service impacts and delays.</li>
+                    <li><strong>Environmental & Traffic Control:</strong> Activate the tunnel ventilation system if the derailment occurred in an underground section, arrange for PA announcements to be made on trains and at stations, and initiate operating procedures to relieve train congestion at the site.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 30: Train Derailment - Traction Power Controller Duties -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">TRAIN DERAILMENT</h2>
+            <p class="slide-subtitle">Subtitle: Electrical Safety and Site Restoration Protocols</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Traction Power Controller (CTPC/TPC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Power De-energization:</strong> Normally, no power supply switching OFF decision shall be taken independently by the CTPC/TPC; however, if instructed by the Traffic Controller, the OHE/33kV power supply shall be switched OFF on the respective lines.</li>
+                    <li><strong>Field Communication:</strong> Convey the emergency message to senior officers and field staff as per the unfolding situation.</li>
+                    <li><strong>Restoration Dispatch:</strong> Instruct OHE staff to reach the accident site by the quickest available means to provide discharge rods so that site restoration work can commence safely.</li>
+                    <li><strong>Information Logging:</strong> Collect and report vital information to senior officers, including the caller's name and ID, train ID, exact location/mast number, adjacent line obstruction status, required medical aid, and presence of fire or smoke.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 31: Stampede Management -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">STAMPEDE</h2>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Definition & Causes</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Definition:</strong> A stampede is a sudden rush of a crowd of panic-stricken people. It may result in injury to persons, loss of human life, or extensive damage to the metro system.</li>
+                    <li><strong>Primary Causes:</strong>
+                        <ul style="margin-bottom: 0;">
+                            <li>Fire or serious accident inside the metro system.</li>
+                            <li>Unusual rush during festivals.</li>
+                            <li>Unusual rush of passengers after sporting events at stadiums, public demonstrations, or political rallies.</li>
+                            <li>Natural calamities like heavy rains or earthquakes.</li>
+                            <li>Heavy traffic on the road leading people to take the metro system.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 32: Stampede - Overview & Immediate Crowd Control -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">STAMPEDE</h2>
+            <p class="slide-subtitle">Subtitle: Risk Overview and Immediate Station Crowd Control Protocols</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">System Overview & Immediate Crowd Control</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>High-Risk Locations & Causes:</strong> Stampedes are manmade disasters that can occur at busy interchanges (e.g., Rajiv Chowk, Kashmere Gate) or very deep stations (e.g., Chawri Bazar) due to excessive passenger overcrowding, bomb blasts/terrorist attacks, or panic-inducing rumors.</li>
+                    <li><strong>Emergency Evacuation Protocol:</strong> If caused by a terrorist attack in the metro premises, the station must be evacuated immediately by opening the flaps of all Automatic Fare Collection (AFC) gates as well as emergency exits.</li>
+                    <li><strong>Service Disruption Crowd Control:</strong> If caused by a disruption in normal train frequency due to technical or other reasons, the following immediate actions must be taken:
+                        <ul style="margin-bottom: 0;">
+                            <li>Make immediate efforts to evacuate the station premises.</li>
+                            <li>Close station entry gates immediately to stop the fresh entry of rushing commuters.</li>
+                            <li>Make regular announcements via the PA system informing passengers about the real nature of the problem.</li>
+                            <li>Deploy clear signage at entry points to divert approaching commuters.</li>
+                            <li>Position NMRC and security staff at entrance points to provide accurate information and prevent rumors.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 33: Stampede - Train Operator & Traffic Controller Duties -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title"> STAMPEDE</h2>
+            <p class="slide-subtitle">Subtitle: Operating Staff and Control Room Emergency Duties</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 1rem;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Train Operator (TO)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Immediate Halt:</strong> Stop the train forthwith and immediately inform the Operational Control Centre (OCC) for further directions.</li>
+                    <li><strong>Passenger Communication:</strong> Announce the service delay to train passengers via the public address system.</li>
+                    <li><strong>OCC Coordination:</strong> Take further action strictly as per the directives of the OCC/TC while keeping passengers regularly informed of the unfolding situation.</li>
+                </ul>
+            </div>
+            
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Duties of the Traffic Controller (TC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Emergency Notification:</strong> Inform all concerned personnel and departments as per the standard OCC communication list.</li>
+                    <li><strong>System-Wide Announcements:</strong> Ensure regular announcements are made to passengers on trains and at stations regarding likely delays and ongoing evacuation procedures until the position becomes clear.</li>
+                    <li><strong>Service Resumption:</strong> Train movement shall only be resumed after confirming that the running of trains through the affected station is completely safe.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 34: Stampede - Traction Power Controller Duties -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">STAMPEDE</h2>
+            <p class="slide-subtitle">Subtitle: Electrical Safety and Power Isolation Protocols</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Traction Power Controller (CTPC/TPC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Power De-energization:</strong> Normally, no power supply switching OFF decision shall be taken independently by the CTPC/TPC; however, if instructed by the Traffic Controller, the OHE/33kV power supply shall be switched OFF on the respective lines.</li>
+                    <li><strong>Field Communication & Restoration:</strong> Convey the emergency message to senior officers and field staff as per the situation. If needed, instruct OHE staff to reach the station to provide discharge rods, but only after receiving clearance from the CC/TC.</li>
+                    <li><strong>Information Logging:</strong> Collect and report vital information to senior officers, including:
+                        <ul style="margin-bottom: 0;">
+                            <li>Exact place of the stampede.</li>
+                            <li>Extent of damage caused.</li>
+                            <li>Number and details of casualties, if any.</li>
+                            <li>Current status of the incident and relief operations.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 35: Terrorist Attack - Overview & Scenarios -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">TERRORIST ATTACK</h2>
+            <p class="slide-subtitle">Subtitle: Threat Scenarios and Chemical/Biological/Radioactive (CBR) Protocols</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">System Overview & Attack Scenarios</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Potential Attack Scenarios:</strong> Terrorist attacks on the Metro network can occur in multiple forms, including:
+                        <ul style="margin-bottom: 0;">
+                            <li>Armed attack, intrusion, indiscriminate firing, or Fidayeen attack on station concourses, platforms, vital installations, or Operations Control Centers (OCC).</li>
+                            <li>Armed attacks targeting VVIPs/VIPs visiting metro stations.</li>
+                            <li>Intrusion of explosive-laden vehicles into receiving sub-stations and train depots forcibly or by deceit.</li>
+                            <li>Human bombs, suicide bombers, or Fidayeen attackers sneaking into stations as passengers, visitors, or impersonating NMRC employees, police, or army personnel.</li>
+                            <li>Use of adjacent buildings in close proximity to throw grenades onto stations or trains.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 36: Terrorist Attack at Station - Station Manager/Controller Duties -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">TERRORIST ATTACK</h2>
+            <p class="slide-subtitle">Subtitle: Emergency Response at Station Premises</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Station Manager / Station Controller (SM/SC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Site Assessment & OCC Alert:</strong> Visit the affected spot to assess the impact on human life and train services, and immediately inform the OCC regarding incident details, time of occurrence, extent of injuries, and presence of smoke or fire.</li>
+                    <li><strong>Emergency Services Coordination:</strong> Assess the need for medical assistance and fire services, indicate the specific gate through which emergency teams should enter, and depute uniformed staff to receive and guide them.</li>
+                    <li><strong>Evacuation & PA Announcements:</strong> Sound the station hooter and get the premises vacated of all passengers immediately. Depute staff to announce at regular intervals via the PA system explaining what has happened and guiding passengers to exit without panic.</li>
+                    <li><strong>Medical Relief & Security:</strong> Mobilize resources to render first aid and evacuate the injured. With the help of security staff, detain any suspicious persons for interrogation.</li>
+                    <li><strong>Witness Documentation:</strong> Record statements, names, and addresses of passengers found near the affected area who have first-hand knowledge of the occurrence.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 37: Terrorist Attack at Station - Traffic Controller / Chief Controller Duties -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">TERRORIST ATTACK</h2>
+            <p class="slide-subtitle">Subtitle: System-Wide Control Room Containment Protocols</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Traffic Controller (TC) / Chief Controller (CC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Agency Notification & Mobilization:</strong> Inform all concerned personnel as per the OCC communication list and immediately mobilize medical assistance and fire services to the spot.</li>
+                    <li><strong>Network Clearance Protocol:</strong> Upon receipt of information regarding bomb explosions, fire, poisonous gas/chemical release, or any act endangering safety, take prompt action to clear the entire metro network:
+                        <ul style="margin-bottom: 0;">
+                            <li>Instruct Train Operators (TOs) of stationary trains to discharge passengers and request them to leave the station quickly.</li>
+                            <li>Instruct TOs of running trains to stop at the first station, discharge all passengers, and take a safe position 50 meters away from the train.</li>
+                            <li>Instruct Station Managers/Controllers to evacuate premises without delay and immediately stop the sale of tickets.</li>
+                        </ul>
+                    </li>
+                    <li><strong>System Closure & Resumption:</strong> Ensure regular announcements are made until all passengers are evacuated. The entire Metro network shall remain closed until rescue and search operations are completed; revenue operations shall only resume after ensuring the system is fully safe and secure.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 38: Terrorist Attack Between Stations - Train Operator & OCC Duties -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">TERRORIST ATTACK</h2>
+            <p class="slide-subtitle">Subtitle: Mid-Section Attacks Affecting the Right of Way</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 1rem;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Train Operator (TO)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Immediate Reporting & Transit:</strong> On noticing any unusual occurrence on track or installations, report immediately to the OCC. If train movement is not obstructed, continue journey to the next station at reduced speed while informing OCC.</li>
+                    <li><strong>Immediate Halt & Protection:</strong> If train running is unsafe, stop the train forthwith, inform the OCC for further directions, and announce the delay to passengers. If the adjacent track is damaged or shows abnormalities, immediately report to the TC and protect the track as per prescribed procedures.</li>
+                    <li><strong>Passenger Information:</strong> Take further action as directed by the OCC while keeping passengers regularly informed of the situation.</li>
+                </ul>
+            </div>
+            
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Duties of the Operational Control Centre (OCC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Traffic Regulation:</strong> Take immediate action to regulate trains and prevent them from running over the affected section.</li>
+                    <li><strong>System Evacuation & Communication:</strong> Take prompt action to clear the entire metro network of all passengers. Inform all concerned departments as per the communication list and make system-wide announcements to keep customers fully informed.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+   <!-- Slide 39: Chemical / Gas Release -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Chemical & Gas Release</h2>
+        </div>
+        <div class="slide-content grid-2" style="align-items: center;">
+            <div>
+                <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 1rem;">
+                    <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Detection & Symptoms</h3>
+                    <ul style="margin-bottom: 0;">
+                        <li>Unusual smell.</li>
+                        <li>Breathing problems, including choking or fainting.</li>
+                        <li>Severe eye or skin irritation.</li>
+                        <li>Vomiting.</li>
+                    </ul>
+                </div>
+                
+                <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);">
+                    <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Immediate Response Actions</h3>
+                    <ul style="margin-bottom: 0;">
+                        <li>The train has to be completely vacated.</li>
+                        <li>To prevent further spreading of gas in the platform area, train doors will be closed.</li>
+                        <li>The incident will be dealt with by Police, Medical, and metro authorities.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: center;">
+                <img src="assets/20a.jpg" alt="Chemical and Gas Response" style="width: 70%; height: auto; max-height: 400px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+            </div>
+        </div>
+    </section>
+
+  <!-- Slide 40: Sabotage - Detailed Response -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">SABOTAGE</h2>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Definition & Potential Scenarios</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Definition:</strong> Sabotage is a treacherous action to defeat or hinder a cause, endeavor, or deliberate subversion.</li>
+                    <li><strong>Targeting Vital Installations:</strong> Sabotage can occur at metro stations (e.g., Station Control Room (SCR), Auxiliary Sub Stations).</li>
+                    <li><strong>System-Wide Targets:</strong> Threats may target the Operations Control Center (OCC), Security Control Room, Receiving Sub Stations, or trains parked in depots.</li>
+                    <li><strong>Insider Threats:</strong> Influencing NMRC, housekeeping, or security staff for monetary or other reasons to extract vital information to sabotage the system.</li>
+                    <li><strong>Cyber Threats:</strong> Cyber attacks targeting the computer-based signal system.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 41: Sabotage - Train Operator & Station Controller Duties -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">SABOTAGE</h2>
+            <p class="slide-subtitle">Subtitle: Emergency Response of Field and Station Personnel</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 1rem;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Train Operator (TO)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Immediate Reporting:</strong> In the event of sabotage taking place involving their train, the TO shall immediately inform the OCC, giving as many details as possible.</li>
+                    <li><strong>Track Protection:</strong> In case the adjacent track is infringed, the TO shall request the Traffic Controller (TC) to protect the adjacent track to avoid multiple accidents as per prescribed procedures.</li>
+                    <li><strong>Passenger Communication:</strong> Inform passengers about the incident, advising them about the rescue and relief arrangements being made.</li>
+                    <li><strong>Injury Assessment:</strong> Assess the situation particularly in respect of passenger injury and again inform the OCC with as much detail as available, seeking medical and other assistance as required.</li>
+                </ul>
+            </div>
+            
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Duties of the Station Controller (SC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>OCC Alert & Details:</strong> Inform the OCC immediately, giving as many details as possible regarding the sabotage incident.</li>
+                    <li><strong>Rescue & First Aid Mobilization:</strong> Mobilize staff for the rapid evacuation of passengers, rendering of first aid to the injured, and arranging their hospitalization as required.</li>
+                    <li><strong>Crowd Communication:</strong> Inform passengers waiting at the station of the likely service delay.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 42: Sabotage - Traffic Controller & Traction Power Controller Duties -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">SABOTAGE</h2>
+            <p class="slide-subtitle">Subtitle: Control Room Containment and Electrical Safety Protocols</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 1rem;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Traffic Controller (TC) / Chief Controller (CC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Emergency Notification:</strong> Immediately on receipt of information about sabotage, the TC/CC shall inform all concerned personnel as per the standard OCC communication list.</li>
+                    <li><strong>Secondary Disaster Response:</strong> If the sabotage has resulted in fire, derailment, or a train accident, the NMRC response will be executed as described for those specific scenarios.</li>
+                    <li><strong>Service Regulation & Resumption:</strong> Train movement shall only be resumed after confirming that running trains to the affected station is completely safe. Until the position becomes clear, regular announcements must be made to passengers on trains and at stations regarding likely delays and evacuation procedures.</li>
+                </ul>
+            </div>
+            
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Duties of the Traction Power Controller (CTPC/TPC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Power De-energization:</strong> Normally, no power supply switching OFF decision shall be taken independently by the CTPC/TPC; however, if instructed by the Traffic Controller, the OHE/33kV power supply shall be switched OFF on the respective lines.</li>
+                    <li><strong>Field Communication & Restoration:</strong> Convey the emergency message to senior officers and field staff as per the situation. If needed, instruct OHE staff to reach the station to provide discharge rods, but only after receiving clearance from the CC/TC.</li>
+                    <li><strong>Information Logging:</strong> On receipt of information, collect and report vital details to senior officers, including the exact place of sabotage, extent of damage, services affected, modus operandi used, and latest status.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 43: Earthquake - System Overview & Infrastructure -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">EARTHQUAKE</h2>
+            <p class="slide-subtitle">Subtitle: Seismic Risk Overview and System Design Safety Features</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">System Overview & Infrastructure Safety</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Seismic Zone & History:</strong> Delhi is located in seismic zone (4) and has a documented history of seismic tremors.</li>
+                    <li><strong>Structural Resilience:</strong> The NMRC network has been specifically designed to withstand earthquakes of an intensity of 7 on the Richter scale.</li>
+                    <li><strong>Sensor Network:</strong> Dedicated earthquake sensors have been installed at Patel Chowk and Vidhan Sabha stations of Line-2 to detect tremors.</li>
+                    <li><strong>Initial Power Action:</strong> Upon tremor detection, the Traction Power Controller (TPC) will switch off the Traction Power Supply in a manner that does not shut down station supplies, while immediately informing the Traffic Controller.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 44: Earthquake - Train Operator Duties -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">EARTHQUAKE</h2>
+            <p class="slide-subtitle">Subtitle: Emergency Response of Onboard Operating Staff</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Train Operator (TO)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Immediate Halt & Alert:</strong> In the event of a significant earthquake, the TO—upon experiencing the impact or being informed by passengers or the OCC—must bring the train to a stop immediately and inform the OCC of the train's exact location.</li>
+                    <li><strong>Station Protocol:</strong> If the train is at a station, the TO will not move the train, will inform the OCC, and will advise passengers to remain inside the train. Once OCC instructions are received confirming the earthquake has subsided, trains waiting at stations will detrain passengers.</li>
+                    <li><strong>Mid-Section Protocol & Visual Check:</strong> For trains held up between stations, TOs must visually check the track. If the track is unaffected and there are no visible obstructions, after informing the OCC/TC, the train can be moved in Restricted Manual (RM) mode at walking speed up to the next station where passengers shall be detrained.</li>
+                    <li><strong>Passenger Communication:</strong> The TO will keep passengers continuously informed of the problem and request them to maintain calm.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 45: Earthquake - Traffic Controller Duties -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">EARTHQUAKE</h2>
+            <p class="slide-subtitle">Subtitle: Control Room Regulation and Service Resumption Protocols</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Traffic Controller (TC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>System-Wide Halt:</strong> The TC shall instruct all Train Operators to stop their trains immediately and report their positions.</li>
+                    <li><strong>Mid-Section Guidance:</strong> For trains held up between stations, the OCC/TC will instruct TOs to visually check the track. If clear of visible obstructions, the TC authorizes moving the train in Restricted Manual (RM) mode at walking speed to the next station to detrain passengers.</li>
+                    <li><strong>Evacuation Contingency:</strong> In case of any doubt regarding track safety, the OCC will arrange for passenger evacuation on the right of way as per established procedure and mobilize resources for rescue and relief work.</li>
+                    <li><strong>Service Resumption:</strong> Normal operation of revenue trains shall only be resumed after the Track and Structures department issues a certificate of fitness for normal operations following a detailed physical inspection.</li>
+                    <li><strong>Passenger Information:</strong> The OCC will ensure that passengers are continuously informed about the unfolding situation and the likely time for the commencement of train services.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- Slide 46: Earthquake - Station Controller & Traction Power Controller Duties -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">EARTHQUAKE</h2>
+            <p class="slide-subtitle">Subtitle: Station Premises Inspection and Electrical Safety Protocols</p>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 1rem;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Duties of the Station Manager / Station Controller (SM/SC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Premises Inspection:</strong> Inspect all station premises immediately; if there is any abnormality, inform the OCC and call other emergency services for help.</li>
+                    <li><strong>Relief Mobilization:</strong> Mobilize station resources for rescue and relief work while continuously seeking instructions from the OCC.</li>
+                    <li><strong>Crowd Communication:</strong> Continuously inform passengers awaiting at the station regarding the situation.</li>
+                </ul>
+            </div>
+            
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 0;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Duties of the Traction Power Controller (CTPC/TPC)</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Power De-energization:</strong> On getting information about an earthquake, power supply should be switched OFF immediately and advised accordingly. Only after getting explicit clearance from the TC can the OHE be charged again.</li>
+                    <li><strong>Field Communication & Discharge Rods:</strong> Convey the message to senior officers and field staff as per the situation. If the need arises, instruct OHE staff to reach the station to provide discharge rods, but strictly only after getting clearance from the CC/TC.</li>
+                    <li><strong>Information Logging:</strong> Try to extract vital information and keep senior officers reported regarding: the affected area of the disaster, extent of damage, services affected, and current status.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 47: Flooding & Wind Restrictions -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Flooding & Wind Speed Restrictions</h2>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 1.5rem;">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Track Flooding Protocols</h3>
+                <ul style="margin-bottom: 0;">
+                    <li>Any staff observing water accumulation must report exact location and water level relative to rails to TC.</li>
+                    <li><strong>Water Below Rail Fastenings:</strong> Train speed is restricted to a maximum of <strong>25 km/h</strong> through the section.</li>
+                    <li><strong>Water Above Rail Fastenings:</strong> Passenger services are suspended; movement permitted only under special instructions.</li>
+                </ul>
+            </div>
+
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Wind Speed Operational Guidelines</h3>
+                <table class="styled-table" style="margin-bottom: 0;">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">Wind Speed</th>
+                            <th style="width: 40%;">Operational Restriction</th>
+                            <th style="width: 40%;">Normalization Procedure</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>70 – 90 km/h</strong></td>
+                            <td>Speed restriction of <strong>40 km/h</strong> enforced across all platform areas and elevated sections.</td>
+                            <td>Normal service resumes automatically once anemometer readings consistently fall below <strong>70 km/h</strong>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>> 90 km/h</strong></td>
+                            <td>
+                                • All trains must stop at the nearest station platform.<br>
+                                • "Global Train Hold" applied by OCC.<br>
+                                • Trains approaching platforms proceed at max <strong>15 km/h</strong>.
+                            </td>
+                            <td>
+                                • When speed drops below 90 km/h, OCC verifies OHE status.<br>
+                                • TC releases global hold to allow movement to platforms.<br>
+                                • Normal speed resumes only when wind falls below <strong>70 km/h</strong>.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 48: Preparedness, Mock Drills & Reference Manuals -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Preparedness, Mock Drills & References</h2>
+        </div>
+        <div class="slide-content">
+            <div class="grid-2" style="margin-bottom: 1rem;">
+                <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                    <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--primary-color);">Disaster Preparedness</h3>
+                    <p style="font-size: 1rem;">Regular mock drills evaluate staff readiness, test inter-agency coordination, and reinforce emergency guidelines in real-time scenarios.</p>
+                </div>
+                <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--accent-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); height: 100%;">
+                    <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--accent-color);">Reference Documents</h3>
+                    <ul style="font-size: 0.95rem; margin-bottom:0;">
+                        <li><strong>General Rules 2020:</strong> Chapter VII – Accidents & Unusual Occurrences.</li>
+                        <li><strong>Handbook:</strong> Dealing With Serious Incidents, Accidents And Disasters.</li>
+                        <li><strong>Safety Circulars:</strong> SC-19 (Terrorist attack) & SC-20 (Detrainment).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card" style="padding: 1.5rem; border-left: 5px solid var(--secondary-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);">
+                <h3 style="margin-top: 0; border-left: none; padding-left: 0; color: var(--secondary-color);">Summary of Executed Mock Drills</h3>
+                <table class="styled-table" style="margin-top: 0.5rem; margin-bottom: 0;">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Station / Location</th>
+                            <th>Simulated Scenario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>28-June-19</td>
+                            <td>Pari Chowk</td>
+                            <td>Earthquake response & structural evacuation</td>
+                        </tr>
+                        <tr>
+                            <td>27-Sept-19</td>
+                            <td>Alpha-I to Delta-I</td>
+                            <td>Fire inside train / Train immobile between stations</td>
+                        </tr>
+                        <tr>
+                            <td>07-Feb-20</td>
+                            <td>KP-II to Pari Chowk</td>
+                            <td>Pantograph entanglement / OHE tearing</td>
+                        </tr>
+                        <tr>
+                            <td>08-Sept-21</td>
+                            <td>NGN Depot</td>
+                            <td>Train derailment / Track-level passenger detrainment</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+<!-- JavaScript Presentation Engine -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        // Function to change active slide
+        function showSlide(index) {
+            if (index < 0) index = 0;
+            if (index >= slides.length) index = slides.length - 1;
+            
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            currentSlide = index;
+        }
+
+        // Arrow Button Navigation Event Listeners
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevents the global click listener from firing
+                showSlide(currentSlide - 1);
+            });
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevents the global click listener from firing
+                showSlide(currentSlide + 1);
+            });
+        }
+
+        // Listen for keyboard arrow keys
+        document.addEventListener('keydown', (e) => {
+            // Next Slide triggers: Right Arrow, Down Arrow, Page Down, Spacebar
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+                e.preventDefault(); // Prevent accidental page scrolling
+                showSlide(currentSlide + 1);
+            } 
+            // Previous Slide triggers: Left Arrow, Up Arrow, Page Up
+            else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+                e.preventDefault(); // Prevent accidental page scrolling
+                showSlide(currentSlide - 1);
+            }
+            // Home Key: Go to first slide
+            else if (e.key === 'Home') {
+                e.preventDefault();
+                showSlide(0);
+            }
+            // End Key: Go to last slide
+            else if (e.key === 'End') {
+                e.preventDefault();
+                showSlide(slides.length - 1);
+            }
+        });
+
+        // NEW: Listen for mouse clicks on the left/right side of the screen
+        document.addEventListener('click', (e) => {
+            // Ignore if the user clicked directly on a button or an interactive element
+            if (e.target.closest('button')) return;
+
+            const screenWidth = window.innerWidth;
+            const clickPositionX = e.clientX;
+
+            // If the click is on the left half of the screen
+            if (clickPositionX < screenWidth / 2) {
+                showSlide(currentSlide - 1);
+            } 
+            // If the click is on the right half of the screen
+            else {
+                showSlide(currentSlide + 1);
+            }
+        });
+
+        // Initialize the first slide
+        showSlide(0);
+    });
+</script>
+
+    <!-- Mock Drill Slide 2 -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Coupling / Train Immobile Between Stations</h2>
+        </div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <img src="assets/103a.jpg" alt="Construction site" style="width: 900px; height: 500px; object-fit: fill; border-radius: 6px;">
+            </div>
+    </section>
+
+    <!-- Mock Drill Slide 3 -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Pantograph Entanglement / OHE Tearing</h2>
+        </div>
+        <div class="slide-content">
+            <div style="display: flex; justify-content: center; align-items: center; gap: 1.5rem;">
+                <img src="assets/102a.jpg" alt="Mock Drill View 1" style="display: block; margin: 0 auto; width: 100%; max-width: 550px; height: 400px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+                <img src="assets/102b.jpg" alt="Mock Drill View 2" style="display: block; margin: 0 auto; width: 100%; max-width: 550px; height: 400px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+            </div>
+        </div>
+    </section>
+
+<!-- Mock Drill Slide 3 -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Train Derailment</h2>
+       </div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                 <img src="assets/101a.jpg" alt="Construction site" style="width: 1000px; height: 550px; object-fit: fill; border-radius: 6px;">
+            </div>
+    </section>
+
+   <!-- Mock Drill Slide with Two Images Stacked Vertically -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title"> Track-Level Passenger Detrainment</h2>
+        </div>
+        <div class="slide-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem; overflow-y: auto; padding: 0.5rem 0;">
+            <!-- Bottom Image -->
+            <div style="text-align: center; width: 100%;">
+                <img src="assets/101b.jpg" alt="Mock Drill Bottom View" style="display: block; margin: 0 auto; width: 100%; max-width: 900px; height: 600px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+            </div>
+        </div>
+    </section>
+
+<!-- Slide: Thank You -->
+    <section class="slide title-slide" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center; padding: 1.5rem;">
+            
+            <!-- Decorative Shield/Safety Icon Accent -->
+            <div style="margin-bottom: 1rem; color: var(--primary-color);">
+                <svg style="width: 70px; height: 70px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+            </div>
+
+            <!-- Enlarged Main Thank You Banner and Box -->
+            <div class="thank-you-banner" style="font-size: 2.75rem; font-weight: 900; letter-spacing: 0.05em; padding: 3rem 4.5rem; max-width: 1100px; width: 90%; border-radius: 20px; background: white; color: var(--primary-color); border: 3px solid var(--primary-color); box-shadow: 0 25px 35px -5px rgba(0,0,0,0.15), 0 15px 15px -5px rgba(0,0,0,0.08);">
+                THANK YOU FOR YOUR COMMITMENT TO SAFETY!
+            </div>
+
+            <!-- Divider Line -->
+            <div style="width: 100px; height: 5px; background-color: var(--accent-color); border-radius: 3px; margin: 2rem 0 1.25rem 0;"></div>
+
+            <!-- Subtitle -->
+            <p style="font-size: 1.4rem; font-weight: 700; color: var(--text-main); letter-spacing: 0.1em; text-transform: uppercase;">
+                Stay Vigilant &bull; Stay Safe
+            </p>
+        </div>
+    </section>
+
+</div>
+</body>
+</html>

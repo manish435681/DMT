@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accident & Disaster Management Manual - Presentation</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #0284c7;
+            --accent-color: #ea580c;
+            --danger-color: #dc2626;
+            --bg-color: aqua; /* Dark background like PPT Presenter Mode */
+            --slide-bg: #ffffff;
+            --text-main: #334155;
+            --text-dark: #0f172a;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden; /* Prevent page scrolling */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .presentation-container {
+            width: 125vw;
+            max-width: 1260px;
+            height: 99vh;
+            max-height: 900px;
+            position: relative;
+        }
+
+        /* Slide Show Mode Styling */
+        .slide {
+            background-color: var(--slide-bg);
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            padding: 2.5rem 3.5rem;
+            width: 100%;
+            height: 100%;
+            display: none; /* Hide all slides by default */
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-top: 8px solid var(--primary-color);
+            overflow-y: auto; /* Allow scrolling inside slide ONLY if screen is very small */
+        }
+
+        /* Only the active slide is displayed */
+        .slide.active {
+            display: flex;
+        }
+
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .slide-title {
+            color: var(--primary-color);
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        .slide-number {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .slide-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Typography & Layouts */
+        h3 {
+            color: var(--text-dark);
+            margin-top: 0.75rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.15rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 0.5rem;
+        }
+
+        ul {
+            list-style-type: none;
+            margin-bottom: 1rem;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+        }
+
+        ul li::before {
+            content: "•";
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -6px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            align-items: start;
+        }
+
+        .card {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .definition-term {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .alert-box {
+            background-color: #fef2f2;
+            border-left: 4px solid var(--danger-color);
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            margin: 0.75rem 0;
+            color: #991b1b;
+            font-size: 0.9rem;
+        }
+
+        .image-placeholder {
+            text-align: center;
+            margin: 0.35rem 0;
+            display: inline-block;
+            width: 100%;
+        }
+
+        /* Tables */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.5rem 0;
+            font-size: 0.85rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .styled-table thead tr {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .styled-table th, .styled-table td {
+            padding: 0.6rem 0.8rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f8fafc;
+        }
+
+        /* Title Slide Specifics */
+        .title-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-top: 8px solid var(--accent-color);
+        }
+
+        .title-slide h1 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .title-slide p {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+        }
+
+        .badge-container {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .badge {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .thank-you-banner {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 8px;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="presentation-container">
+
+    <!-- Slide 1: Title Slide -->
+    <section class="slide title-slide active">
+        <span class="slide-number" style="position: absolute; top: 20px; right: 20px;">Slide 1</span>
+        <h1>ACCIDENT & DISASTER MANAGEMENT MANUAL & CONTINGENCY PLAN</h1>
+        <p><strong>Prepared By:</strong> [Department / Author Name]</p>
+        <div style="width: 80%; display: flex; gap: 1rem; justify-content: center; margin-top: 1rem;">
+            <!-- Use this format for your images -->
+            <img src="1a.jpg" alt="Construction site" style="width: 25%; height: auto; display: block; border-radius: 6px;">
+            <!-- Use this format for your images -->
+            <img src="1b.jpg" alt="Metro Logo" style="width: 25%; height: auto; display: block; border-radius: 6px;">
+            <!-- Use this format for your images -->
+            <img src="1c.jpg" alt="Safety Icon" style="width: 25%; height: auto; display: block; border-radius: 6px;">
+        </div>
+    </section>
+
+    <!-- Slide 2: Introduction & Objectives -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Introduction & Objectives</h2>
+            <span class="slide-number">Slide 2</span>
+        </div>
+        <div class="slide-content grid-2">
+            <div>
+                <h3>Introduction</h3>
+                <p>The purpose of the Disaster Management Manual is to provide step-by-step guidelines to all stakeholders responsible for dealing with different types of incidents, accidents, disasters, and emergencies.</p>
+                <div style="margin-top: 1.5rem;">
+                    <!-- Use this format for your images -->
+                    <img src="2a.jpg" alt="Manual Overview" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                </div>
+            </div>
+            <div>
+                <h3>Key Objectives</h3>
+                <ul>
+                    <li>Save lives and alleviate suffering.</li>
+                    <li>Provide help to stranded passengers and arrange their prompt evacuation.</li>
+                    <li>Instill a sense of security amongst all concerned by providing accurate information.</li>
+                    <li>Protect Metro Rail property.</li>
+                    <li>Ascertain the cause of the accident.</li>
+                    <li>Expedite the restoration of train operations.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 3: Serious Incidents & Classifications -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Serious Incidents & Classifications</h2>
+            <span class="slide-number">Slide 3</span>
+        </div>
+        <div class="slide-content grid-2">
+            <div>
+                <h3>Recognized Serious Incidents</h3>
+                <ul>
+                    <li>Fire, smoke emission, or explosion in metro trains/premises.</li>
+                    <li>Derailment of a train.</li>
+                    <li>Collision of trains.</li>
+                    <li>Security threats, terrorist attacks, or bomb explosions.</li>
+                    <li>Chemical or biological gas release in trains or stations.</li>
+                    <li>Natural calamities: cyclones, floods, and earthquakes.</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Operational Definitions</h3>
+                <div class="card">
+                    <p><span class="definition-term">Incident:</span> Any event which causes or has the potential to cause delay or disruption to train services.</p>
+                </div>
+                <div class="card">
+                    <p><span class="definition-term">Accident:</span> Any event which has the potential to or does actually cause loss of life, injury, and/or damage to property.</p>
+                </div>
+                <div class="card">
+                    <p><span class="definition-term">Emergency / Disaster:</span> Events that may or may not necessarily be the outcome of train accidents, but have the potential to cause loss of life or injury to human beings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 4: Civil Structure & Station SOPs -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Civil Structure & Station SOPs</h2>
+            <span class="slide-number">Slide 4</span>
+        </div>
+        <div class="slide-content grid-2">
+            <div>
+                <h3>Civil and Structural Resilience</h3>
+                <ul>
+                    <li><strong>Seismic Design:</strong> Located in Seismic Zone IV, the elevated track and infrastructure are designed to withstand an earthquake of intensity 7 on the Richter scale.</li>
+                    <li><strong>Building Standards:</strong> Metro Station buildings are categorized as assembly buildings. Fire safety equipment is installed strictly per the National Building Code requirements.</li>
+                </ul>
+                <!-- Use this format for your images -->
+                <img src="4a.jpg" alt="Structural Diagram" style="width: 50%; height: auto; display: block; border-radius: 6px;">[source: 1]
+            </div>
+            <div>
+                <h3>Standard Operating Procedure (SOP) – Station</h3>
+                <ul>
+                    <li>Immediate response to station fire alarms.</li>
+                    <li>Execution of emergency evacuation protocols.</li>
+                    <li>Rapid mobilization of emergency services.</li>
+                    <li>Systematic response to local incidents and crowd management.</li>
+                    <li>Deployment of Emergency Stop Plunger (ESP) & Platform Supervisory Booth (PSB).</li>
+                </ul>
+                <!-- Use this format for your images -->
+                <img src="4b.jpg" alt="Station SOP Flowchart" style="width: 50%; height: auto; display: block; border-radius: 6px;">[source: 1]
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5: Passenger Safety Provisions at Stations -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Passenger Safety Provisions at Stations</h2>
+            <span class="slide-number">Slide 5</span>
+        </div>
+        <div class="slide-content">
+            <p style="margin-bottom: 1rem;"><em>Designed in strict accordance with the National Building Code (NBC) and National Fire Protection Association (NFPA) guidelines:</em></p>
+            <div class="badge-container" style="gap: 0.75rem; display: grid; grid-template-columns: repeat(3, 1fr);">
+                <div class="card" style="margin:0;">🚨 Fire detection alarm & suppression system</div>
+                <div class="card" style="margin:0;">🪜 Firemen staircase and designated emergency exits</div>
+                <div class="card" style="margin:0;">💡 Emergency ventilation, lighting & signage</div>
+                <div class="card" style="margin:0;">🛠️ Dedicated Disaster Management facilities</div>
+                <div class="card" style="margin:0;">🏥 Medical facilities and first-aid integration</div>
+                <div class="card" style="margin:0;">🧯 Advanced fire-fighting infrastructure</div>
+                <div class="card" style="margin:0;">📢 Passenger Information System (PIDS / PAS)</div>
+                <div class="card" style="margin:0;">📹 Comprehensive CCTV surveillance</div>
+                <div class="card" style="margin:0;">barrier Emergency-override AFC gate control</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 6: Fire Fighting Facilities & Detection Systems -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Fire Fighting Facilities & Detection Systems</h2>
+            <span class="slide-number">Slide 6</span>
+        </div>
+        <div class="slide-content">
+            <p>Comprehensive fire detection, suppression, and monitoring systems are integrated across all station panels, detectors, and suppression devices.</p>
+            <h3>Key System Components</h3>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-top: 0.5rem;">
+                <div class="badge">Fire Hydrants</div>
+                <div class="badge">Manual Call Points (MCP)</div>
+                <div class="badge">Portable Extinguishers</div>
+                <div class="badge">Smoke & Heat Detectors</div>
+                <div class="badge">Fire Alarm Panel</div>
+                <div class="badge">Dedicated Fire Tanks</div>
+                <div class="badge">Inert Gas Flooding (ASS)</div>
+                <div class="badge">Fire Brigade Draw-off</div>
+                <div class="badge">Dedicated Pump Rooms</div>
+                <div class="badge">Platform Sprinklers</div>
+                <div class="badge">Smoke Screens</div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1rem;">
+                <!-- Use this format for your images -->
+                <img src="6a.jpg" alt="Fire Hydrant" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                <!-- Use this format for your images -->
+                <img src="6b.jpg" alt="Alarm Panel" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                <!-- Use this format for your images -->
+                <img src="6c.jpg" alt="Gas Flooding" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                <!-- Use this format for your images -->
+                <img src="6d.jpg" alt="Sprinklers" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                <!-- Use this format for your images -->
+                <img src="6e.jpg" alt="MCP Layout" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                <!-- Use this format for your images -->
+                <img src="6f.jpg" alt="Pump Room" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 7: Medical Facilities & Passenger Information Systems -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Medical Facilities & Information Systems</h2>
+            <span class="slide-number">Slide 7</span>
+        </div>
+        <div class="slide-content grid-2">
+            <div>
+                <h3>Medical Facilities</h3>
+                <ul>
+                    <li><strong>Emergency Coordination:</strong> Seamless coordination with private and government ambulance services (Dial 102 or 1098).</li>
+                    <li><strong>First Aid:</strong> Fully equipped first-aid boxes are readily available across all stations and onboard all trains.</li>
+                </ul>
+                <!-- Use this format for your images -->
+                <img src="7a.jpg" alt="Medical Room" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                <!-- Use this format for your images -->
+                <img src="7b.jpg" alt="First Aid Equipment" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+            </div>
+            <div>
+                <h3>Passenger Information System (PIDS/PAS)</h3>
+                <ul>
+                    <li><strong>Visual Displays (PIDS):</strong> Double-sided PIDS boards are installed on each platform; single-sided PIDS boards serve the concourse area.</li>
+                    <li><strong>Audio System (PAS):</strong> The Public Address System ensures clear audio announcements covering the entire station layout.</li>
+                </ul>
+                <!-- Use this format for your images -->
+                <img src="7c.jpg" alt="PIDS Display Board" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                <div style="display: flex; gap: 0.5rem;">
+                    <!-- Use this format for your images -->
+                    <img src="7d.jpg" alt="Concourse PAS" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                    <!-- Use this format for your images -->
+                    <img src="7e.jpg" alt="Platform PAS" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 8: CCTV, AFC Control Equipment & Signage -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">CCTV, AFC Control Equipment & Signage</h2>
+            <span class="slide-number">Slide 8</span>
+        </div>
+        <div class="slide-content grid-2">
+            <div>
+                <h3>CCTV Surveillance & AFC Control</h3>
+                <ul>
+                    <li><strong>Strategic Coverage:</strong> Cameras cover concourse and platform areas, including TOM, AFC gates, lifts, escalators, and entry/exit points.</li>
+                    <li><strong>Monitoring & Recording:</strong> A CCTV Man-Machine Interface (MMI) is active in the Station Control Room (SCR). Recording hardware is secured in the Telecom Equipment Room.</li>
+                    <li><strong>AFC Emergency Mode:</strong> Computerized control of AFC gates is managed from the SCR. In emergencies, all gates switch to <em>free-mode</em> for rapid evacuation.</li>
+                </ul>
+                <div style="display: flex; gap: 0.5rem;">
+                    <!-- Use this format for your images -->
+                    <img src="8a.jpg" alt="CCTV MMI" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                    <!-- Use this format for your images -->
+                    <img src="8b.jpg" alt="AFC Gates" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                </div>
+            </div>
+            <div>
+                <h3>Safety & Directional Signage</h3>
+                <p style="margin-bottom: 0.5rem; font-size: 0.9rem;">Clear, standardized signage guides passengers during normal operations and emergencies:</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                    <!-- Use this format for your images -->
+                    <img src="8e.jpg" alt="Exit Signage" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                    <!-- Use this format for your images -->
+                    <img src="8f.jpg" alt="Emergency Exit" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                    <!-- Use this format for your images -->
+                    <img src="8g.jpg" alt="Assembly Area" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                    <!-- Use this format for your images -->
+                    <img src="8h.jpg" alt="Fire Equipment Sign" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 9: Rolling Stock Safety & Onboard Equipment -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Rolling Stock Safety & Onboard Equipment</h2>
+            <span class="slide-number">Slide 9</span>
+        </div>
+        <div class="slide-content grid-2">
+            <div>
+                <h3>Train Structural & Safety Features</h3>
+                <ul>
+                    <li><strong>Fire Retardant:</strong> Extensive use of non-inflammable materials in the body structure.</li>
+                    <li><strong>Underfloor Protection:</strong> Coach underfloors are rated for a 30-minute Fire Resistance Period (FRP).</li>
+                    <li><strong>Crashworthiness:</strong> Body structure is engineered to absorb collision energy and resist deformation.</li>
+                    <li><strong>Emergency Lighting:</strong> 1-hour battery backup for internal emergency lighting.</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Onboard Emergency Equipment</h3>
+                <ul>
+                    <li>Fire extinguishers provisioned inside every train car.</li>
+                    <li>Emergency doors and emergency ventilation systems.</li>
+                    <li>Exterior release devices accessible at selected doors.</li>
+                    <li>Direct emergency communication channels between passengers, Train Operator (TO), and Operation Control Centre (OCC).</li>
+                </ul>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                    <!-- Use this format for your images -->
+                    <img src="9a.jpg" alt="Extinguisher" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                    <!-- Use this format for your images -->
+                    <img src="9b.jpg" alt="Door Release" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 10: Evacuation & Passenger Communication Systems -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Evacuation & Communication Systems</h2>
+            <span class="slide-number">Slide 10</span>
+        </div>
+        <div class="slide-content grid-2">
+            <div>
+                <h3>Fire Protection & Evacuation Protocols</h3>
+                <ul>
+                    <li><strong>30-Minute Shield:</strong> Underfloor 30-minute FRP allows critical time to transit to the nearest station during a fire incident.</li>
+                    <li><strong>Emergency Doors:</strong> Designated doors facilitate rapid passenger evacuation.</li>
+                    <li><strong>Egress & Access Devices:</strong> Every door features an interior Emergency Egress Device; L2/R3 doors are equipped with exterior Emergency Access Devices for rescue teams.</li>
+                </ul>
+                <div style="display: flex; gap: 0.5rem;">
+                    <!-- Use this format for your images -->
+                    <img src="10a.jpg" alt="Egress Device" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                    <!-- Use this format for your images -->
+                    <img src="10b.jpg" alt="Evacuation Drill" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                </div>
+            </div>
+            <div>
+                <h3>Passenger Communication System</h3>
+                <ul>
+                    <li><strong>Public Address:</strong> Trains feature a robust PA system integrated with automated, pre-recorded emergency guidance announcements.</li>
+                    <li><strong>PECU:</strong> Provision of Passenger Emergency Communication Units (PECU) allows immediate two-way contact with train operations staff during distress.</li>
+                </ul>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                    <!-- Use this format for your images -->
+                    <img src="10c.jpg" alt="PECU Unit" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                    <!-- Use this format for your images -->
+                    <img src="10d.jpg" alt="PA Speaker" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                    <!-- Use this format for your images -->
+                    <img src="10e.jpg" alt="TO Control Panel" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                    <!-- Use this format for your images -->
+                    <img src="10f.jpg" alt="Help Point" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 11: Signaling, Electrical & Communication Redundancy -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Signaling, Electrical & Communication Redundancy</h2>
+            <span class="slide-number">Slide 11</span>
+        </div>
+        <div class="slide-content grid-3">
+            <div class="card">
+                <h3>Signaling (CATC)</h3>
+                <ul>
+                    <li>Continuous Automatic Train Control ensures safe movement & speed control.</li>
+                    <li>Controls platform door opening.</li>
+                    <li>Emergency Stop Plunger (ESP) integration.</li>
+                    <li>Skip station, Train hold & Keep doors closed functions.</li>
+                    <li>Emergency/Incident mode in AFC gates.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Electrical Systems</h3>
+                <ul>
+                    <li>Dual power redundancy (Normal & Emergency supplies).</li>
+                    <li>Backup DG sets & Uninterruptible Power Supply (UPS).</li>
+                    <li>Emergency Trip System (ETS).</li>
+                    <li>Robust ventilation, lighting, and pump/drainage infrastructure.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Communication</h3>
+                <ul>
+                    <li>Dedicated phone lines for UP Police, Ambulance (CATS), and Fire Services.</li>
+                    <li>Emergency mode in train radio and passenger alarm systems.</li>
+                    <li>TETRA system deployed across all stations, trains, depots, and OCC.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 12: Security & Disaster Management Team (DMT) -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Security & Disaster Management Team (DMT)</h2>
+            <span class="slide-number">Slide 12</span>
+        </div>
+        <div class="slide-content grid-2">
+            <div>
+                <h3>Security Structure (UP PAC)</h3>
+                <p>Internal security is managed by UP PAC (handed over Jan 24, 2019), while UP Police handles law and order.</p>
+                <ul>
+                    <li>Mandatory security checks of all commuters entering paid areas.</li>
+                    <li>Quick Reaction Teams (QRT) stationed for rapid emergency deployment.</li>
+                    <li>Specialized Bomb Disposal Squads and Dog Squads.</li>
+                </ul>
+                <div style="display: flex; gap: 0.5rem;">
+                    <!-- Use this format for your images -->
+                    <img src="12a.jpg" alt="PAC Security Check" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                    <!-- Use this format for your images -->
+                    <img src="12b.jpg" alt="QRT Team" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                </div>
+            </div>
+            <div>
+                <h3>Disaster Management Team (DMT)</h3>
+                <p><strong>Objective:</strong> To handle disasters effectively in a systematic, hierarchical order.</p>
+                <div class="card" style="margin-top: 0.5rem;">
+                    <strong>Core Committee Members:</strong>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; font-size: 0.8rem; margin-top: 0.5rem; gap: 0.2rem;">
+                        <div>• HOD/O – Chairman</div>
+                        <div>• Dy. HOD/E&M</div>
+                        <div>• Dy. HOD/Operations</div>
+                        <div>• Dy. HOD/Traction</div>
+                        <div>• Dy. HOD/Rolling Stock</div>
+                        <div>• Dy. HOD/Civil & Track</div>
+                        <div>• Dy. HOD/Signaling</div>
+                        <div>• Dy. HOD/Safety</div>
+                        <div>• Dy. HOD/Telecom</div>
+                        <div>• Asst. Security Comms.</div>
+                        <div style="grid-column: span 2;">• Fire Officer</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 13: Types of Disasters & Fire Management -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Types of Disasters & Fire Management</h2>
+            <span class="slide-number">Slide 13</span>
+        </div>
+        <div class="slide-content grid-2">
+            <div>
+                <h3>Disaster Categorization</h3>
+                <div class="card">
+                    <strong>Man-Made Disasters:</strong>
+                    <p style="font-size: 0.85rem; margin-top: 0.2rem;">Fire, derailment/collision, stampede, terrorist attacks, bomb threats, chemical/biological gas release, and sabotage.</p>
+                </div>
+                <div class="card">
+                    <strong>Natural Calamities:</strong>
+                    <p style="font-size: 0.85rem; margin-top: 0.2rem;">Earthquakes, floods, and severe wind storms.</p>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <!-- Use this format for your images -->
+                    <img src="13a.jpg" alt="Prevention" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                    <!-- Use this format for your images -->
+                    <img src="13b.jpg" alt="Safety Audit" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                </div>
+            </div>
+            <div>
+                <h3>Fire Management & Electrical Safety</h3>
+                <p>Fire is recognized as one of the most critical hazards in metro operations, categorized into: <em>Electrical Equipment Fire, Train Fire, and Station Premises Fire</em>.</p>
+                
+                <div class="alert-box">
+                    <strong>⚠️ CRITICAL SAFETY RULE:</strong><br>
+                    No water shall EVER be used to extinguish an electrical fire.
+                </div>
+
+                <ul>
+                    <li>In the event of an electrical fire, power supply must be cut off immediately by informing the Traction Power Controller.</li>
+                    <li>Inert gas flooding and clean-agent extinguishers must be deployed instead of water-based suppressants.</li>
+                </ul>
+                <div style="display: flex; gap: 0.5rem;">
+                    <!-- Use this format for your images -->
+                    <img src="13c.jpg" alt="CO2 Extinguisher" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                    <!-- Use this format for your images -->
+                    <img src="13d.jpg" alt="Power Switch" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 14: Fire Procedures – Train & Station Premises -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Fire Procedures: Train & Station Premises</h2>
+            <span class="slide-number">Slide 14</span>
+        </div>
+        <div class="slide-content grid-2">
+            <div>
+                <h3>Fire Onboard a Train</h3>
+                <ul>
+                    <li>Train Operator (TO) must immediately inform OCC upon observing fire or continued tripping between stations.</li>
+                    <li>TO assesses whether the train can safely reach the next station platform.</li>
+                    <li>If unsafe to proceed or disabled, TO uses onboard fire extinguishers to fight the blaze.</li>
+                    <li>Once extinguished, passengers are detrained at the next station and train is withdrawn.</li>
+                    <li>If uncontrollable, TO evacuates passengers immediately via track while OCC halts adjacent line traffic.</li>
+                </ul>
+                <!-- Use this format for your images -->
+                <img src="14a.jpg" alt="Onboard Fire Response" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+            </div>
+            <div>
+                <h3>Fire at Station Premises</h3>
+                <ul>
+                    <li>Station Controller (SC/SM) immediately alerts OCC and calls for Fire, Police, and Medical assistance.</li>
+                    <li>Sound station hooters and make clear PA announcements directing passengers to designated emergency exits.</li>
+                    <li>Coordinate with police and security for orderly crowd control to prevent panic.</li>
+                    <li>Isolate the affected area using Q-managers and deploy station suppression systems.</li>
+                    <li>Electrical/Traction staff must isolate and cut power to the affected sector.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 15: Collisions, Stampedes & Terrorist Attacks -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Collisions, Stampedes & Terrorist Attacks</h2>
+            <span class="slide-number">Slide 15</span>
+        </div>
+        <div class="slide-content grid-3">
+            <div class="card">
+                <h3>Train Collisions</h3>
+                <ul>
+                    <li>Witnessing employee must immediately alert OCC with exact location and fire status.</li>
+                    <li><strong>Priority:</strong> If adjacent track is infringed, protect it first to prevent secondary accidents.</li>
+                    <li>Render immediate first aid and execute OCC-approved evacuation.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Stampede Control</h3>
+                <p style="font-size: 0.8rem; margin-bottom: 0.4rem;"><strong>Causes:</strong> Panic from accidents, festival rushes, or road diversions.</p>
+                <ul>
+                    <li>SC takes active control of concourse and platforms.</li>
+                    <li>Deploy Q-managers and seek PAC/Police reinforcement.</li>
+                    <li>Use calming, authoritative PA announcements to prevent panic.</li>
+                </ul>
+                <!-- Use this format for your images -->
+                <img src="15a.jpg" alt="Crowd Control" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+            </div>
+            <div class="card">
+                <h3>Terrorist / Bomb Threat</h3>
+                <ul>
+                    <li>Immediate evacuation & closure of affected network sector.</li>
+                    <li>No resumption of operations until clearance from Bomb Disposal Squads.</li>
+                    <li>In a train blast: detrain passengers safely, isolate train, and initiate triage.</li>
+                </ul>
+                <!-- Use this format for your images -->
+                <img src="15b.jpg" alt="Screening" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 16: Hazardous Gases, Sabotage & Earthquakes -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Hazardous Gases, Sabotage & Earthquakes</h2>
+            <span class="slide-number">Slide 16</span>
+        </div>
+        <div class="slide-content grid-3">
+            <div>
+                <h3>Chemical / Gas Release</h3>
+                <p style="font-size: 0.8rem;"><strong>Indicators:</strong> Odors, choking, eye/skin irritation, or fainting.</p>
+                <ul>
+                    <li>Immediate complete evacuation of train or station area.</li>
+                    <li>Train doors must be closed after evacuation to prevent gas spreading across platforms.</li>
+                    <li>Hand over site to specialized Medical & Police CBRN units.</li>
+                </ul>
+                <!-- Use this format for your images -->
+                <img src="16a.jpg" alt="Hazmat Response" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+            </div>
+            <div>
+                <h3>Anti-Sabotage Protocols</h3>
+                <ul>
+                    <li>Strict physical and technical surveillance of vital installations: SCR, ASS, OCC, and depots.</li>
+                    <li>Vigilance against external manipulation of housekeeping, security, or staff to extract sensitive system details.</li>
+                </ul>
+                <!-- Use this format for your images -->
+                <img src="16b.jpg" alt="Vital Installation" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+            </div>
+            <div>
+                <h3>Earthquake Procedures</h3>
+                <ul>
+                    <li>Traffic Controller (TC) instructs TOs to stop trains and report positions.</li>
+                    <li><strong>At Station:</strong> Train remains held at platform until OCC clearance.</li>
+                    <li><strong>Between Stations:</strong> TO conducts visual track check. If clear, proceed at <em>walking speed</em> to next station.</li>
+                    <li>Normal service resumes only after structural fitness cert is issued.</li>
+                </ul>
+                <!-- Use this format for your images -->
+                <img src="16c.jpg" alt="Inspection" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 17: Flooding & Wind Restrictions -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Flooding & Wind Speed Restrictions</h2>
+            <span class="slide-number">Slide 17</span>
+        </div>
+        <div class="slide-content">
+            <div class="card" style="margin-bottom: 1rem;">
+                <h3>Track Flooding Protocols</h3>
+                <ul style="margin-bottom: 0;">
+                    <li>Any staff observing water accumulation must report exact location and water level relative to rails to TC.</li>
+                    <li><strong>Water Below Rail Fastenings:</strong> Train speed is restricted to a maximum of <strong>25 km/h</strong> through the section.</li>
+                    <li><strong>Water Above Rail Fastenings:</strong> Passenger services are suspended; movement permitted only under special instructions.</li>
+                </ul>
+            </div>
+
+            <h3>Wind Speed Operational Guidelines</h3>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Wind Speed</th>
+                        <th style="width: 40%;">Operational Restriction</th>
+                        <th style="width: 40%;">Normalization Procedure</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>70 – 90 km/h</strong></td>
+                        <td>Speed restriction of <strong>40 km/h</strong> enforced across all platform areas and elevated sections.</td>
+                        <td>Normal service resumes automatically once anemometer readings consistently fall below <strong>70 km/h</strong>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>> 90 km/h</strong></td>
+                        <td>
+                            • All trains must stop at the nearest station platform.<br>
+                            • "Global Train Hold" applied by OCC.<br>
+                            • Trains approaching platforms proceed at max <strong>15 km/h</strong>.
+                        </td>
+                        <td>
+                            • When speed drops below 90 km/h, OCC verifies OHE status.<br>
+                            • TC releases global hold to allow movement to platforms.<br>
+                            • Normal speed resumes only when wind falls below <strong>70 km/h</strong>.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Slide 18: Preparedness, Mock Drills & Reference Manuals -->
+    <section class="slide">
+        <div class="slide-header">
+            <h2 class="slide-title">Preparedness, Mock Drills & References</h2>
+            <span class="slide-number">Slide 18</span>
+        </div>
+        <div class="slide-content">
+            <div class="grid-2" style="margin-bottom: 0.5rem;">
+                <div>
+                    <h3>Disaster Preparedness</h3>
+                    <p style="font-size: 0.9rem;">Regular mock drills evaluate staff readiness, test inter-agency coordination, and reinforce emergency guidelines in real-time scenarios.</p>
+                </div>
+                <div>
+                    <h3>Reference Documents</h3>
+                    <ul style="font-size: 0.85rem; margin-bottom:0;">
+                        <li><strong>General Rules 2020:</strong> Chapter VII – Accidents & Unusual Occurrences.</li>
+                        <li><strong>Handbook:</strong> Dealing With Serious Incidents, Accidents And Disasters.</li>
+                        <li><strong>Safety Circulars:</strong> SC-19 (Terrorist attack) & SC-20 (Detrainment).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Summary of Executed Mock Drills</h3>
+            <table class="styled-table" style="margin-top: 0.2rem;">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Station / Location</th>
+                        <th>Simulated Scenario</th>
+                        <th>Documentation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>28-June-19</td>
+                        <td>Pari Chowk</td>
+                        <td>Earthquake response & structural evacuation</td>
+                        <td>
+                            <!-- Use this format for your images -->
+                            <img src="18b.jpg" alt="Mock Drill Pari Chowk" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>27-Sept-19</td>
+                        <td>Alpha-I to Delta-I</td>
+                        <td>Fire inside train / Train immobile between stations</td>
+                        <td>
+                            <!-- Use this format for your images -->
+                            <img src="18c.jpg" alt="Mock Drill Alpha-I" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>07-Feb-20</td>
+                        <td>KP-II to Pari Chowk</td>
+                        <td>Pantograph entanglement / OHE tearing</td>
+                        <td>
+                            <!-- Use this format for your images -->
+                            <img src="18d.jpg" alt="Mock Drill KP-II" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>08-Sept-21</td>
+                        <td>NGN Depot</td>
+                        <td>Train derailment / Track-level passenger detrainment</td>
+                        <td>
+                            <!-- Use this format for your images -->
+                            <img src="18e.jpg" alt="Mock Drill NGN Depot" style="width: 100%; height: auto; display: block; border-radius: 6px;">[source: 1]
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="thank-you-banner">
+                THANK YOU FOR YOUR COMMITMENT TO SAFETY!
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- JavaScript Presentation Engine -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        // Function to change active slide
+        function showSlide(index) {
+            if (index < 0) index = 0;
+            if (index >= slides.length) index = slides.length - 1;
+            
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            currentSlide = index;
+        }
+
+        // Listen for keyboard arrow keys
+        document.addEventListener('keydown', (e) => {
+            // Next Slide triggers: Right Arrow, Down Arrow, Page Down, Spacebar
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+                e.preventDefault(); // Prevent accidental page scrolling
+                showSlide(currentSlide + 1);
+            } 
+            // Previous Slide triggers: Left Arrow, Up Arrow, Page Up
+            else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+                e.preventDefault(); // Prevent accidental page scrolling
+                showSlide(currentSlide - 1);
+            }
+            // Home Key: Go to first slide
+            else if (e.key === 'Home') {
+                e.preventDefault();
+                showSlide(0);
+            }
+            // End Key: Go to last slide
+            else if (e.key === 'End') {
+                e.preventDefault();
+                showSlide(slides.length - 1);
+            }
+        });
+
+        // Initialize the first slide
+        showSlide(0);
+    });
+</script>
+
+</body>
+</html>
